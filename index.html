@@ -1,0 +1,1543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bouquet Fleurs — Tiznit · Fleuriste en ligne 3D</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><g transform='translate(16 16)'><ellipse rx='4' ry='12' fill='%23B4433A'/><ellipse rx='4' ry='12' fill='%23B4433A' transform='rotate(60)'/><ellipse rx='4' ry='12' fill='%23B4433A' transform='rotate(120)'/><circle r='4.6' fill='%23B9862F'/></g></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..700&family=Karla:ital,wght@0,300..800;1,300..800&family=Cairo:wght@300..800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F5EEDF; --paper2:#EDE2CC; --card:#F9F4E9;
+    --ink:#2A3320; --ink-soft:#59614A;
+    --line:rgba(42,51,32,.24); --line-soft:rgba(42,51,32,.12);
+    --rose:#B4433A; --terra:#CE6A4A; --gold:#B9862F; --sage:#7C9261; --leaf:#5E7245;
+    --wa:#1FA855; --wa-dark:#128C4B;
+    --f-d:'Fraunces',serif; --f-b:'Karla',sans-serif;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;scrollbar-width:thin;scrollbar-color:var(--ink) var(--paper)}
+  body{background:var(--paper);color:var(--ink);font:16px/1.65 var(--f-b);-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  body::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:120;opacity:.05;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='140' height='140' filter='url(%23n)'/%3E%3C/svg%3E");}
+  ::selection{background:#EBD9B8}
+  svg{display:block}
+  a{color:inherit}
+  h1,h2,h3{font-family:var(--f-d);font-weight:420;letter-spacing:-.02em;line-height:1.04}
+  em{font-style:italic}
+  .wrap{max-width:1180px;margin:0 auto;padding-inline:clamp(20px,4vw,48px)}
+  section{padding-block:clamp(70px,9vw,110px);scroll-margin-top:86px}
+
+  [data-rv]{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s cubic-bezier(.2,.7,.2,1);transition-delay:var(--d,0s)}
+  [data-rv].in{opacity:1;transform:none}
+
+  .btn{display:inline-flex;align-items:center;gap:9px;font:600 15px var(--f-b);padding:13px 24px;border-radius:999px;
+    border:1.5px solid var(--ink);background:transparent;color:var(--ink);cursor:pointer;text-decoration:none;
+    transition:transform .18s ease,box-shadow .18s ease,background .18s ease,color .18s ease}
+  .btn-primary{background:var(--ink);color:var(--paper)}
+  .btn:hover{transform:translate(-2px,-2px);box-shadow:4px 4px 0 var(--ink)}
+  .btn-primary:hover{box-shadow:4px 4px 0 var(--rose)}
+  .btn-inv{border-color:var(--paper);color:var(--paper)}
+  .btn-inv:hover{box-shadow:4px 4px 0 var(--gold)}
+  .btn-wa{background:var(--wa);border-color:var(--wa);color:#fff}
+  .btn-wa:hover{box-shadow:4px 4px 0 var(--wa-dark)}
+  :focus-visible{outline:2px dashed var(--rose);outline-offset:3px}
+
+  .eyebrow{font:700 12px var(--f-b);letter-spacing:.22em;text-transform:uppercase;color:var(--rose)}
+
+  /* ============ header ============ */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;height:72px;display:flex;align-items:center;
+    transition:background .3s ease,border-color .3s ease,backdrop-filter .3s ease;border-bottom:1px solid transparent}
+  header.scrolled{background:rgba(245,238,223,.86);backdrop-filter:blur(10px);border-bottom-color:var(--line-soft)}
+  .hd-in{width:100%;max-width:1240px;margin:0 auto;padding-inline:clamp(18px,3vw,40px);display:flex;align-items:center;gap:26px}
+  .brand{display:flex;align-items:center;gap:11px;text-decoration:none;font-family:var(--f-d);font-size:19px;letter-spacing:-.01em;white-space:nowrap}
+  .brand em{font-style:italic;color:var(--rose)}
+  .brand-ava{position:relative;width:30px;height:30px;flex:none;border-radius:50%;overflow:hidden;box-shadow:0 0 0 1.5px var(--ink)}
+  .brand-ava svg,.brand-ava img{position:absolute;inset:0;width:100%;height:100%}
+  .brand-ava img{object-fit:cover}
+  nav.main{display:flex;gap:28px;margin-inline-start:auto}
+  nav.main a{text-decoration:none;font:600 14px var(--f-b);letter-spacing:.02em;position:relative}
+  nav.main a::after{content:'';position:absolute;left:0;right:100%;bottom:-5px;border-top:1.5px solid var(--rose);transition:right .25s ease}
+  nav.main a:hover::after{right:0}
+  .hd-right{display:flex;align-items:center;gap:14px;margin-inline-start:8px}
+  .ig-link,.wa-link{display:grid;place-items:center;width:38px;height:38px;border:1.5px solid var(--ink);border-radius:50%;transition:.2s}
+  .ig-link:hover{background:var(--ink);color:var(--paper)}
+  .wa-link{color:var(--wa-dark)}
+  .wa-link:hover{background:var(--wa);border-color:var(--wa);color:#fff}
+  .hd-cta{padding:10px 20px}
+  #menuBtn{display:none;width:40px;height:40px;background:none;border:1.5px solid var(--ink);border-radius:50%;cursor:pointer;position:relative}
+  #menuBtn span{position:absolute;left:11px;right:11px;height:1.8px;background:var(--ink);transition:.25s}
+  #menuBtn span:first-child{top:15px}#menuBtn span:last-child{bottom:15px}
+  #menuBtn.x span:first-child{top:19px;transform:rotate(45deg)}
+  #menuBtn.x span:last-child{bottom:18.2px;transform:rotate(-45deg)}
+  #mmenu{position:fixed;top:72px;left:0;right:0;z-index:49;background:var(--paper);border-bottom:1.5px solid var(--ink);
+    display:none;flex-direction:column;padding:10px 24px 22px}
+  #mmenu.open{display:flex}
+  #mmenu a{font-family:var(--f-d);font-size:30px;text-decoration:none;padding:10px 0;border-bottom:1px solid var(--line-soft)}
+  #mmenu a:last-child{border:none}
+
+  /* ============ hero ============ */
+  .hero{padding-top:150px;padding-bottom:30px;display:grid;grid-template-columns:1.08fr .92fr;gap:clamp(30px,4vw,60px);align-items:center}
+  .hero h1{font-size:clamp(44px,6.6vw,86px);margin:18px 0 24px}
+  .squig{position:relative;font-style:italic;color:var(--rose);white-space:nowrap}
+  .squig svg{position:absolute;left:-2%;bottom:-10px;width:104%;height:12px}
+  .lead{max-width:52ch;font-size:17.5px;color:var(--ink-soft)}
+  .hero-cta{display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin:32px 0 30px}
+  .lnk{font:600 15px var(--f-b);text-decoration:none;display:inline-flex;gap:8px;align-items:center;border-bottom:1.5px solid var(--ink);padding-bottom:3px;transition:.2s}
+  .lnk:hover{color:var(--rose);border-color:var(--rose)}
+  .hero-meta{display:flex;align-items:center;flex-wrap:wrap;font-size:14.5px;color:var(--ink-soft)}
+  .dot{width:5px;height:5px;background:var(--gold);transform:rotate(45deg);display:inline-block;margin:0 12px 2px}
+
+  .hero-art{position:relative;justify-self:center;width:min(100%,470px)}
+  .arch{position:relative;width:100%;aspect-ratio:420/480;
+    background:radial-gradient(120% 95% at 50% 28%,#F3EAD6 0%,var(--paper2) 72%);
+    border:1.5px solid var(--ink);border-radius:999px 999px 28px 28px;overflow:hidden}
+  .arch.outline::after{content:'';position:absolute;inset:0;outline:1px solid var(--line);outline-offset:-11px;border-radius:inherit;pointer-events:none;z-index:3}
+  .arch svg,.stage svg{width:100%;height:100%}
+  .arch canvas,.stage canvas,.mini-arch canvas{width:100%;height:100%;display:block}
+  .arch canvas,.stage canvas{touch-action:pan-y;cursor:grab}
+  .arch canvas:active,.stage canvas:active{cursor:grabbing}
+  .art-cap{margin-top:14px;font-size:14px;color:var(--ink-soft);text-align:center}
+  .art-cap a{color:var(--rose)}
+  .stamp{position:absolute;top:-24px;right:-14px;width:116px;height:116px;background:var(--paper);
+    border:1.5px solid var(--ink);border-radius:50%;display:grid;place-items:center;transform:rotate(-8deg);
+    transition:transform .7s cubic-bezier(.15,.6,.2,1);z-index:2}
+  .stamp svg{width:100%;height:100%}
+  .stamp-img{position:absolute;inset:0;margin:auto;width:52px;height:52px;border-radius:50%;
+    object-fit:cover;box-shadow:0 0 0 1.5px var(--gold)}
+  #stampText{animation:spin 24s linear infinite;transform-origin:60px 60px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+
+  /* 3D overlays */
+  .drag-hint{position:absolute;left:50%;bottom:13px;transform:translateX(-50%);z-index:4;display:flex;gap:8px;align-items:center;
+    background:rgba(42,51,32,.85);color:var(--paper);font:600 12px var(--f-b);letter-spacing:.05em;padding:7px 15px;border-radius:999px;
+    opacity:0;transition:opacity .45s;pointer-events:none;white-space:nowrap}
+  .drag-hint.show{opacity:1}
+  .stage-tools{position:absolute;top:12px;right:12px;z-index:4;display:flex;flex-direction:column;gap:8px}
+  .tool-b{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--ink);background:rgba(245,238,223,.92);color:var(--ink);
+    display:grid;place-items:center;cursor:pointer;transition:.15s;padding:0}
+  .tool-b:hover{background:var(--ink);color:var(--paper)}
+  .tool-b.off{opacity:.4}
+  .chip3d{position:absolute;z-index:4;transform:translate(-50%,-135%);background:var(--ink);color:var(--paper);
+    font:600 12.5px var(--f-b);padding:5px 12px;border-radius:999px;pointer-events:none;white-space:nowrap;opacity:0;transition:opacity .15s}
+  .chip3d.show{opacity:1}
+  .chip3d span{opacity:.78;font-weight:600}
+  body.no3d canvas{display:none}
+  body.no3d .drag-hint,body.no3d .stage-tools{display:none}
+
+  /* ============ ticker ============ */
+  .ticker{border-block:1px solid var(--line);overflow:hidden;padding-block:12px;margin-top:26px}
+  .ticker-track{display:flex;width:max-content;animation:tick 32s linear infinite;align-items:center}
+  .ticker:hover .ticker-track{animation-play-state:paused}
+  @keyframes tick{to{transform:translateX(-50%)}}
+  .tk{font:700 12px var(--f-b);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);white-space:nowrap;margin-right:30px}
+  .glyph{color:var(--gold);margin-right:30px;flex:none}
+
+  /* ============ section head ============ */
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;flex-wrap:wrap;
+    border-bottom:1.5px solid var(--ink);padding-bottom:22px;margin-bottom:clamp(34px,4vw,56px)}
+  .sec-head h2{font-size:clamp(36px,4.6vw,60px);margin-top:12px}
+  .sec-head h2 em{color:var(--rose)}
+  .sec-note{max-width:36ch;font-size:14.5px;color:var(--ink-soft);text-align:right}
+
+  /* ============ signatures ============ */
+  .sig{display:grid;grid-template-columns:.92fr 1.08fr;gap:clamp(28px,4vw,64px);align-items:center;
+    padding-block:clamp(36px,4vw,54px);border-bottom:1px solid var(--line-soft)}
+  .sig:nth-child(even) .sig-fig{order:2}
+  .sig-fig{width:min(100%,380px);margin-inline:auto}
+  .mini-arch{background:var(--paper2);border:1.5px solid var(--ink);border-radius:999px 999px 22px 22px;
+    overflow:hidden;aspect-ratio:420/480;transition:transform .35s ease}
+  .mini-arch svg,.mini-arch canvas{width:100%;height:100%;display:block}
+  .sig:hover .mini-arch{transform:translateY(-6px)}
+  .sig-idx{font:700 12px var(--f-b);letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+  .sig h3{font-size:clamp(32px,3.4vw,46px);margin:10px 0 14px}
+  .sig p.desc{color:var(--ink-soft);max-width:46ch}
+  .sig-stems{margin-top:14px;font:600 13px var(--f-b);letter-spacing:.12em;text-transform:uppercase;color:var(--leaf)}
+  .sig-foot{display:flex;align-items:center;gap:22px;margin-top:24px;flex-wrap:wrap}
+  .sig-price{font-family:var(--f-d);font-size:30px;font-style:italic}
+
+.sig-price.tbd{font-size:22px;line-height:1.2}
+  .custom-note{display:block;margin-top:18px;max-width:46ch}
+  .custom-note span{display:block;font:700 11.5px var(--f-b);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:4px}
+  .custom-note textarea{width:100%;background:var(--card);border:1.5px solid var(--line);border-radius:14px;
+    font:16px var(--f-b);color:var(--ink);padding:12px 14px;resize:vertical;min-height:96px}
+  .custom-note textarea:focus{outline:none;border-color:var(--ink)}
+
+  .mini-arch{position:relative}
+  .note-tag{position:absolute;left:20%;right:20%;top:11%;z-index:3;pointer-events:none;text-align:center;
+    background:none;border:none;box-shadow:none;padding:0;
+    font:italic 400 17px/1.3 var(--f-d);color:var(--ink);
+    word-break:break-word;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .note-tag[hidden]{display:none}
+
+    /* ============ composer ============ */
+  #composer{background:var(--card);border-block:1.5px solid var(--ink)}
+  .comp-grid{display:grid;grid-template-columns:minmax(0,1fr) 430px;gap:clamp(30px,4vw,64px);align-items:start}
+  .stage-wrap{position:sticky;top:92px}
+  .stage{position:relative;background:radial-gradient(120% 95% at 50% 28%,#F3EAD6 0%,var(--paper2) 72%);
+    border:1.5px solid var(--ink);border-radius:999px 999px 26px 26px;
+    overflow:hidden;aspect-ratio:420/480;width:min(100%,470px);margin-inline:auto}
+  .stage.outline::after{content:'';position:absolute;inset:0;outline:1px solid var(--line);outline-offset:-11px;border-radius:inherit;pointer-events:none;z-index:3}
+  .stage-empty{position:absolute;left:8%;right:8%;top:56%;text-align:center;pointer-events:none;transition:opacity .3s;z-index:2}
+  .stage.empty .stage-empty{opacity:1}
+  .stage:not(.empty) .stage-empty{opacity:0}
+  .stage-empty b{display:block;font-family:var(--f-d);font-style:italic;font-weight:400;font-size:22px;margin-bottom:4px}
+  .stage-empty span{font-size:13.5px;color:var(--ink-soft)}
+  .stage-bar{display:flex;justify-content:space-between;align-items:baseline;gap:14px;margin-top:14px;padding-inline:6px}
+  #stemCount{font-family:var(--f-d);font-style:italic;font-size:20px}
+  .stage-bar small{color:var(--ink-soft);font-size:13px}
+
+  .grp{margin-bottom:26px}
+  .grp-l{display:flex;justify-content:space-between;align-items:baseline;font:700 12px var(--f-b);letter-spacing:.2em;
+    text-transform:uppercase;color:var(--ink-soft);margin-bottom:12px}
+
+  .p-row{display:grid;grid-template-columns:1fr auto auto;gap:14px;align-items:center;
+    padding-block:13px;border-top:1px solid var(--line-soft)}
+  .p-row:last-child{border-bottom:1px solid var(--line-soft)}
+  .p-sw{display:flex}
+  .p-sw i{width:15px;height:15px;border-radius:50%;box-shadow:0 0 0 2.5px var(--card);margin-left:-6px}
+  .p-sw i:first-child{margin-left:0}
+  .p-name b{font-family:var(--f-d);font-size:18px;font-weight:500}
+  .p-name span{display:block;font-size:12.5px;color:var(--ink-soft)}
+  .sug-tag{display:inline-flex;align-items:center;gap:5px;font:700 11px var(--f-b);letter-spacing:.08em;
+    text-transform:uppercase;color:var(--gold);margin-top:2px}
+  .p-price{font-family:var(--f-d);font-size:18px;white-space:nowrap}
+  .p-price span{font:600 11px var(--f-b);color:var(--ink-soft);letter-spacing:.04em}
+  .p-step{display:flex;align-items:center;gap:10px}
+  .step{width:30px;height:30px;border-radius:50%;border:1.5px solid var(--ink);background:transparent;color:var(--ink);
+    display:grid;place-items:center;cursor:pointer;transition:.15s;font-size:16px;line-height:1}
+  .step:hover{background:var(--ink);color:var(--paper)}
+  .p-n{min-width:20px;text-align:center;font:700 16px var(--f-b)}
+  .p-row.has .p-name b{color:var(--rose)}
+
+  .hrow{display:flex;align-items:baseline;font-size:15px;padding-block:6px}
+  .hrow i{flex:1;border-bottom:1.5px dotted var(--line);margin:0 10px}
+  .fee-note{font-size:12.5px;color:var(--ink-soft);margin-top:6px}
+
+  .fld{display:block;margin-bottom:18px}
+  .fld span{display:block;font:700 11.5px var(--f-b);letter-spacing:.18em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:2px}
+  .fld input,.fld textarea{width:100%;background:transparent;border:none;border-bottom:1.5px solid var(--line);
+    font:16px var(--f-b);color:var(--ink);padding:8px 2px;resize:none}
+  .fld input:focus,.fld textarea:focus{outline:none;border-color:var(--ink)}
+
+  .comp-actions{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-top:8px}
+  .comp-actions .btn-primary{margin-inline-start:auto}
+  .comp-note{font-size:12.5px;color:var(--ink-soft);margin-top:14px;text-align:right}
+
+  /* ============ instagram gallery ============ */
+  .ig-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(14px,2vw,22px)}
+  .post{position:relative;display:block;border:1.5px solid var(--ink);border-radius:16px;overflow:hidden;
+    background:var(--paper2);aspect-ratio:4/5;transition:transform .25s ease,box-shadow .25s ease}
+  .post img{width:100%;height:100%;object-fit:cover;display:block}
+  .post:hover{transform:translate(-3px,-3px);box-shadow:6px 6px 0 var(--ink)}
+  .post-ov{position:absolute;left:10px;right:10px;bottom:10px;display:flex;justify-content:space-between;align-items:center;
+    gap:10px;padding:8px 12px;background:rgba(38,47,29,.8);border-radius:10px;color:var(--paper);
+    font:600 13.5px var(--f-b);opacity:0;transform:translateY(6px);transition:.25s ease}
+  .post:hover .post-ov,.post:focus-visible .post-ov{opacity:1;transform:none}
+  .post-ov svg{flex:none}
+  .ig-empty{border:1.5px dashed var(--line);border-radius:20px;padding:48px 24px;text-align:center;color:var(--ink-soft)}
+  .ig-empty b{display:block;font-family:var(--f-d);font-style:italic;font-weight:400;font-size:clamp(22px,2.4vw,28px);color:var(--ink);margin-bottom:6px}
+  .ig-empty .btn{margin-top:20px}
+  .ig-more{margin-top:34px;text-align:center}
+  @media(max-width:760px){.ig-grid{grid-template-columns:repeat(2,1fr)}}
+
+  /* ============ atelier ============ */
+  .pull{font-family:var(--f-d);font-style:italic;font-weight:380;font-size:clamp(28px,4vw,52px);
+    line-height:1.18;max-width:22ch;margin-bottom:clamp(36px,5vw,64px)}
+  .pull b{color:var(--rose);font-weight:380}
+  .at-grid{display:grid;grid-template-columns:1.25fr .95fr;gap:clamp(30px,5vw,70px)}
+  .story-cols{columns:2;column-gap:44px;color:var(--ink-soft);font-size:15.5px}
+  .story-cols p{margin-bottom:16px;break-inside:avoid}
+  .story-cols::first-letter{font-family:var(--f-d);font-size:64px;line-height:.8;float:left;padding:6px 10px 0 0;color:var(--rose)}
+  .facts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 18px;margin-top:34px;
+    font-family:var(--f-d);font-style:italic;font-size:clamp(17px,1.6vw,21px)}
+  .facts .glyph{margin:0}
+
+  .map-card{background:var(--paper2);border:1.5px solid var(--ink);border-radius:22px;padding:20px 20px 16px}
+  .map-card h4,.hours-card h4{font:700 12px var(--f-b);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:10px}
+  .map-card svg{width:100%;height:auto}
+  #mapInfo{margin-top:8px;border-top:1px dashed var(--line);padding-top:10px;font-size:13.5px;color:var(--ink-soft);min-height:44px}
+  .hours-card{background:var(--paper2);border:1.5px solid var(--ink);border-radius:22px;padding:20px;margin-top:18px}
+  .hours-note{font-size:12.5px;color:var(--ink-soft);margin-top:10px}
+
+  /* ============ contact ============ */
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(16px,2.5vw,26px)}
+  .contact-card{border:1.5px solid var(--ink);border-radius:22px;padding:clamp(24px,3vw,36px);position:relative;overflow:hidden}
+  .contact-card.wa{background:linear-gradient(165deg,#E9F6EE 0%,var(--card) 70%)}
+  .contact-card.ig{background:var(--card)}
+  .cc-ic{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;margin-bottom:16px;border:1.5px solid var(--ink)}
+  .contact-card.wa .cc-ic{background:var(--wa);border-color:var(--wa);color:#fff}
+  .contact-card.ig .cc-ic{background:var(--ink);color:var(--paper)}
+  .contact-card h3{font-size:clamp(26px,2.6vw,34px);margin-bottom:4px}
+  .cc-handle{font:700 15px var(--f-b);letter-spacing:.03em;color:var(--ink);text-decoration:none;display:inline-block;margin-bottom:14px}
+  .cc-handle.wa{color:var(--wa-dark);font-size:19px}
+  .cc-handle:hover{color:var(--rose)}
+  .cc-handle.wa:hover{color:var(--wa)}
+  .contact-card p{color:var(--ink-soft);font-size:14.5px;margin-bottom:20px;max-width:40ch}
+  .cc-tag{position:absolute;top:clamp(20px,3vw,32px);right:clamp(20px,3vw,32px);
+    font:700 10.5px var(--f-b);letter-spacing:.14em;text-transform:uppercase;
+    background:var(--wa);color:#fff;border-radius:999px;padding:5px 12px}
+  .cc-tag.ig{background:var(--ink)}
+  @media(max-width:760px){.contact-grid{grid-template-columns:1fr}}
+
+  /* ============ floating buttons ============ */
+  .float-stack{position:fixed;right:18px;bottom:18px;z-index:60;display:flex;flex-direction:column;align-items:flex-end;gap:10px}
+  .wa-float,.ig-float{display:flex;align-items:center;gap:10px;color:#fff;border-radius:999px;
+    padding:14px 20px 14px 16px;font:700 14.5px var(--f-b);text-decoration:none;
+    transition:transform .18s ease,box-shadow .18s ease,background .18s ease}
+  .wa-float{background:var(--wa);box-shadow:0 10px 26px rgba(18,140,75,.38)}
+  .wa-float:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(18,140,75,.48);background:var(--wa-dark)}
+  .ig-float{background:radial-gradient(circle at 28% 110%,#FEDA75 0%,#FA7E1E 28%,#D62976 58%,#962FBF 82%,#4F5BD5 100%);
+    box-shadow:0 10px 26px rgba(150,47,191,.38)}
+  .ig-float:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(150,47,191,.48)}
+  .wa-float svg,.ig-float svg{flex:none}
+  @media(max-width:640px){
+    .float-stack{right:14px;bottom:14px;gap:9px}
+    .wa-float,.ig-float{padding:15px}
+    .wa-label,.ig-label{display:none}
+  }
+
+  /* ============ footer ============ */
+  footer{background:#262F1D;color:var(--paper);padding:clamp(60px,8vw,90px) 0 26px;scroll-margin-top:80px}
+  .ft-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,4vw,60px);padding-bottom:clamp(40px,6vw,70px)}
+  footer h4{font:700 12px var(--f-b);letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:16px}
+  footer p{color:rgba(245,238,223,.75);font-size:15px}
+  .hrow-f{display:flex;align-items:baseline;font-size:15px;padding-block:5px;color:rgba(245,238,223,.9)}
+  .hrow-f i{flex:1;border-bottom:1px dotted rgba(245,238,223,.35);margin:0 10px}
+  .ft-ava{width:46px;height:46px;border-radius:50%;border:1.5px solid var(--gold);object-fit:cover;margin-bottom:14px;display:block}
+  .ft-ig,.ft-wa{margin-top:14px}
+  .ft-wa{border-color:var(--wa);color:#fff;background:var(--wa)}
+  .ft-wa:hover{box-shadow:4px 4px 0 rgba(31,168,85,.45)}
+  .ft-num{font:700 17px var(--f-b);letter-spacing:.04em;color:#fff;margin-top:14px;display:inline-flex;align-items:center;gap:8px}
+  .ft-num svg{color:#5FD68F}
+  .ft-num a{color:#fff;text-decoration:none;border-bottom:1px dotted rgba(255,255,255,.4)}
+  .ft-dm{font-size:13px;color:rgba(245,238,223,.55);margin-top:12px;word-break:break-all}
+  .ft-dm a{color:rgba(245,238,223,.8)}
+  .mega{font-family:var(--f-d);font-weight:600;letter-spacing:-.03em;line-height:.88;text-align:center;
+    font-size:clamp(64px,13.5vw,190px);color:rgba(245,238,223,.13);user-select:none}
+  .mega span{display:block;font-style:italic;font-weight:380}
+  .ft-bottom{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid rgba(245,238,223,.18);
+    margin-top:34px;padding-top:20px;font-size:13px;color:rgba(245,238,223,.55)}
+  .ft-bottom a{color:rgba(245,238,223,.75)}
+
+  /* ============ modal ============ */
+  .modal{position:fixed;inset:0;z-index:80;display:grid;place-items:center;padding:20px}
+  .modal[hidden]{display:none}
+  .modal-bg{position:absolute;inset:0;background:rgba(38,47,29,.52)}
+  .modal-card{position:relative;background:var(--paper);border:1.5px solid var(--ink);border-radius:20px;
+    width:min(480px,94vw);max-height:88vh;overflow:auto;padding:30px 30px 26px;
+    box-shadow:8px 8px 0 rgba(38,47,29,.85);opacity:0;transform:translateY(16px) scale(.97);transition:.28s cubic-bezier(.2,.7,.2,1)}
+  .modal.show .modal-card{opacity:1;transform:none}
+  .modal-x{position:absolute;top:16px;right:16px;width:36px;height:36px;border-radius:50%;border:1.5px solid var(--ink);
+    background:transparent;color:var(--ink);display:grid;place-items:center;cursor:pointer;transition:.15s}
+  .modal-x:hover{background:var(--ink);color:var(--paper)}
+  .modal-card h3{font-size:32px;margin:8px 0 18px}
+  .m-line{display:flex;align-items:baseline;font-size:15px;padding-block:5px}
+  .m-line i{flex:1;border-bottom:1.5px dotted var(--line);margin:0 10px}
+  .m-line.total{border-top:1.5px solid var(--ink);margin-top:10px;padding-top:12px;font-family:var(--f-d);font-size:21px}
+  #mMeta{font-size:13.5px;color:var(--ink-soft);margin:14px 0 20px}
+  .m-actions{display:flex;gap:12px;flex-wrap:wrap}
+  .m-actions .btn{flex:1;justify-content:center}
+  .m-note{font-size:12.5px;color:var(--ink-soft);margin-top:16px}
+  .m-note b{color:var(--wa-dark)}
+
+  /* ============ toast ============ */
+  #toasts{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:90;display:flex;flex-direction:column;align-items:center;gap:8px;pointer-events:none}
+  .toast{background:var(--ink);color:var(--paper);padding:11px 22px;border-radius:999px;font-size:14px;
+    box-shadow:4px 4px 0 rgba(42,51,32,.25);animation:tin .3s ease;white-space:nowrap;max-width:92vw;overflow:hidden;text-overflow:ellipsis}
+  .toast.go{opacity:0;transform:translateY(10px);transition:.45s}
+  @keyframes tin{from{opacity:0;transform:translateY(12px)}}
+
+
+  .lang-btn{height:38px;padding:0 15px;border:1.5px solid var(--ink);border-radius:999px;background:none;color:var(--ink);
+    font:700 14px var(--f-b);cursor:pointer;transition:.2s;white-space:nowrap}
+  .lang-btn:hover{background:var(--ink);color:var(--paper)}
+
+  /* ============ Arabic / RTL ============ */
+  html[dir=rtl]{--f-d:'Cairo','Fraunces',serif;--f-b:'Cairo','Karla',sans-serif}
+  html[dir=rtl] *{letter-spacing:0!important;font-style:normal!important}
+  html[dir=rtl] h1,html[dir=rtl] h2,html[dir=rtl] h3{line-height:1.3}
+  html[dir=rtl] .hero h1{line-height:1.25}
+  html[dir=rtl] .pull{line-height:1.5;max-width:none}
+  html[dir=rtl] .story-cols::first-letter{font-family:inherit;font-size:inherit;float:none;padding:0;color:inherit;line-height:inherit}
+  html[dir=rtl] .ticker{direction:ltr}
+  html[dir=rtl] .sec-note,html[dir=rtl] .comp-note{text-align:left}
+  html[dir=rtl] .cc-tag{right:auto;left:clamp(20px,3vw,32px)}
+  html[dir=rtl] .modal-x{right:auto;left:16px}
+  html[dir=rtl] .cc-handle,html[dir=rtl] .ft-num a,html[dir=rtl] .ft-dm a,html[dir=rtl] .cc-tag.ig{direction:ltr;unicode-bidi:isolate}
+  html[dir=rtl] .hrow b,html[dir=rtl] .hrow-f span:last-child,html[dir=rtl] .m-line b{unicode-bidi:plaintext}
+  @media(max-width:860px){.lang-btn{padding:0 12px}}
+
+  /* ============ responsive ============ */
+  @media(max-width:980px){
+    .hero{grid-template-columns:1fr;padding-top:120px}
+    .hero-art{margin-top:14px}
+    .sec-note{text-align:left}
+    .comp-grid{grid-template-columns:1fr}
+    .stage-wrap{position:static}
+    .at-grid{grid-template-columns:1fr}
+    .story-cols{columns:1}
+    .ft-grid{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:860px){
+    nav.main{display:none}
+    #menuBtn{display:block}
+    .hd-cta{display:none}
+  }
+  @media(max-width:640px){
+    .sig{grid-template-columns:1fr}
+    .sig:nth-child(even) .sig-fig{order:0}
+    .ft-grid{grid-template-columns:1fr}
+    .stamp{width:92px;height:92px;top:-14px;right:-6px}
+    .stamp-img{width:42px;height:42px}
+    .p-row{grid-template-columns:1fr auto;grid-template-areas:"name step" "price step"}
+    .p-name{grid-area:name}.p-step{grid-area:step}
+    .p-price{grid-area:price;justify-self:end;font-size:15px;margin-top:-22px}
+  }
+  @media(prefers-reduced-motion:reduce){
+    #stampText,.ticker-track{animation:none}
+    [data-rv]{transition:none;opacity:1;transform:none}
+    html{scroll-behavior:auto}
+  }
+</style>
+</head>
+<body class="no3d">
+
+<!-- ================= HEADER ================= -->
+<header id="hdr">
+  <div class="hd-in">
+    <a class="brand" href="#top">
+      <span class="brand-ava" aria-hidden="true">
+        <svg viewBox="0 0 32 32"><g transform="translate(16 16)">
+          <ellipse rx="4" ry="11.5" fill="#B4433A"/><ellipse rx="4" ry="11.5" fill="#B4433A" transform="rotate(60)"/>
+          <ellipse rx="4" ry="11.5" fill="#B4433A" transform="rotate(120)"/><circle r="4.4" fill="#B9862F"/>
+        </g></svg>
+        <img class="js-ava" alt="" referrerpolicy="no-referrer">
+      </span>
+      <span>Bouquet Fleurs <em>Tiznit</em></span>
+    </a>
+    <nav class="main">
+      <a href="#collections">Signatures</a>
+      <a href="#composer">Composer</a>
+      <a href="#atelier">The atelier</a>
+      <a href="#instagram">Instagram</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="hd-right">
+      <a class="wa-link" href="https://wa.me/212718618633?text=Hello%20Bouquet%20Fleurs!%20%F0%9F%8C%B8" target="_blank" rel="noopener" aria-label="WhatsApp — +212 7 18 61 86 33" title="WhatsApp — +212 7 18 61 86 33">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.83 14.06c-.24.68-1.4 1.31-1.93 1.36-.53.05-1.03.24-2.9-.6-2.25-1-3.68-3.32-3.79-3.47-.11-.15-.91-1.21-.91-2.31 0-1.1.58-1.64.78-1.86.2-.22.44-.28.59-.28.15 0 .29 0 .42.01.15.01.34-.06.53.4.2.47.67 1.64.73 1.76.06.12.1.26.02.41-.08.15-.15.25-.3.4-.15.15-.31.33-.44.44-.15.13-.3.28-.13.56.17.28.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.44.29.15.46.13.63-.08.17-.21.73-.85.92-1.14.19-.29.39-.24.65-.15.26.1 1.67.79 1.95.93.29.15.48.22.55.34.07.13.07.73-.17 1.42z"/></svg>
+      </a>
+      <button class="lang-btn" id="langBtn" data-dyn type="button" aria-label="Language">العربية</button>
+      <a class="ig-link" href="https://www.instagram.com/bouquetfleurs_tiznit/" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+      </a>
+      <a class="btn btn-primary hd-cta" href="#composer">Compose</a>
+      <button id="menuBtn" aria-label="Menu"><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+<div id="mmenu">
+  <a href="#collections">Signatures</a>
+  <a href="#composer">Composer</a>
+  <a href="#atelier">The atelier</a>
+  <a href="#instagram">Instagram</a>
+  <a href="#contact">Contact</a>
+</div>
+
+<main id="top">
+  <!-- ================= HERO ================= -->
+  <section class="hero wrap" id="hero">
+    <div class="hero-text">
+      <p class="eyebrow" data-rv>Fleuriste en ligne · Tiznit — Souss-Massa, Morocco</p>
+      <h1 data-rv style="--d:.08s">Flowers from <em>the souk</em>,<br>tied by hand<br>and brought to
+        <span class="squig">your door<svg viewBox="0 0 120 12" preserveAspectRatio="none" aria-hidden="true"><path d="M2 7 C 25 2 45 10 70 5 C 90 1 105 8 118 4" stroke="#B4433A" stroke-width="3.4" fill="none" stroke-linecap="round"/></svg></span>.
+      </h1>
+      <p class="lead" data-rv style="--d:.16s">Bouquet Fleurs is an online flower studio in Tiznit — no shopfront, no counter. We buy at dawn in souk El Had, tie the same morning, and deliver anywhere in the city before the light turns.</p>
+      <div class="hero-cta" data-rv style="--d:.24s">
+        <a class="btn btn-primary" href="#composer">Compose your bouquet
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v15M6 13l6 6 6-6"/></svg></a>
+        <a class="lnk" href="#contact">Talk to the florist
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></a>
+      </div>
+      <p class="hero-meta" data-rv style="--d:.3s">
+        fresh every morning <i class="dot"></i> since 2018 <i class="dot"></i> order by WhatsApp or DM
+      </p>
+    </div>
+    <div class="hero-art" data-rv style="--d:.15s">
+      <div class="arch outline" id="heroArc">
+        <canvas id="heroCanvas" aria-label="3D bouquet — drag to spin, hover a flower to see its name"></canvas>
+        <div class="drag-hint" id="heroHint">
+          <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg>
+          Drag to spin the bouquet
+        </div>
+      </div>
+      <p class="art-cap">Picked this morning: Souss roses, peonies &amp; white anemones — <a href="#composer">compose one like it</a></p>
+    </div>
+  </section>
+
+  <!-- ticker -->
+  <div class="ticker" aria-hidden="true"><div class="ticker-track" id="tickerTrack" data-dyn></div></div>
+
+  <!-- ================= SIGNATURES ================= -->
+  <section id="collections" class="wrap">
+    <div class="sec-head" data-rv>
+      <div>
+        <p class="eyebrow">01 · The signatures</p>
+        <h2>Bouquets we tie <em>every day</em></h2>
+      </div>
+      <p class="sec-note">Real 3D models, tied stem by stem and slowly turning. Every stem is 15 MAD — the price you see is the price you pay, with red kraft, black ribbon, hand-tying and delivery all included.</p>
+    </div>
+
+    <article class="sig" data-rv>
+      <figure class="sig-fig"><div class="mini-arch"><canvas class="mini" data-recipe="rose:5,gyp:3,euca:2" data-ribbon="#1A1A1A" aria-label="3D preview — Le Rose de Tiznit"></canvas></div></figure>
+      <div class="sig-info">
+        <span class="sig-idx">N°01 — bestseller</span>
+        <h3>Le Rose de Tiznit</h3>
+        <p class="desc">Our bestseller since day one — five deep Souss roses lifted by a cloud of gypsophila, tied low and generous, the way Tiznit likes it.</p>
+        <p class="sig-stems">5 roses · 3 gypsophila · 2 eucalyptus</p>
+        <div class="sig-foot"><span class="sig-price">150 MAD</span>
+          <button class="btn" data-preset="rose:5,gyp:3,euca:2" data-name="Le Rose de Tiznit">Compose this
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="sig" data-rv>
+      <figure class="sig-fig"><div class="mini-arch"><canvas class="mini" data-recipe="peony:2,gerbera:3,tulip:2,euca:3" data-ribbon="#1A1A1A" aria-label="3D preview — Jardin du Souk"></canvas></div></figure>
+      <div class="sig-info">
+        <span class="sig-idx">N°02 — warm &amp; loud</span>
+        <h3>Jardin du Souk</h3>
+        <p class="desc">Warm as a mid-morning in souk El Had: late peonies and golden gerberas with tulips leaning in, plenty of eucalyptus, wrapped in red kraft with a black ribbon.</p>
+        <p class="sig-stems">2 peonies · 3 gerberas · 2 tulips · 3 eucalyptus</p>
+        <div class="sig-foot"><span class="sig-price">150 MAD</span>
+          <button class="btn" data-preset="peony:2,gerbera:3,tulip:2,euca:3" data-name="Jardin du Souk">Compose this
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="sig" data-rv>
+      <figure class="sig-fig"><div class="mini-arch"><canvas class="mini" data-recipe="anemone:4,rose:2,gyp:3" data-ribbon="#1A1A1A" aria-label="3D preview — Nuit de la Médina"></canvas></div></figure>
+      <div class="sig-info">
+        <span class="sig-idx">N°03 — quiet &amp; dark</span>
+        <h3>Nuit de la Médina</h3>
+        <p class="desc">White anemones with ink-dark hearts, two quiet roses, gypsophila like stars over the medina — for evenings, vows and long tables.</p>
+        <p class="sig-stems">4 anemones · 2 roses · 3 gypsophila</p>
+        <div class="sig-foot"><span class="sig-price">135 MAD</span>
+          <button class="btn" data-preset="anemone:4,rose:2,gyp:3" data-name="Nuit de la Médina">Compose this
+            <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12h15M13 6l6 6-6 6"/></svg></button>
+        </div>
+      </div>
+    </article>
+
+    <article class="sig" data-rv>
+      <figure class="sig-fig"><div class="mini-arch"><canvas class="mini" id="customCanvas" data-recipe="rose:2,peony:2,tulip:1,gerbera:1,gyp:2,euca:1" data-ribbon="#1A1A1A" aria-label="3D preview — Sur mesure"></canvas></div></figure>
+      <div class="sig-info">
+        <span class="sig-idx">N°04 — made for you</span>
+        <h3>Sur mesure</h3>
+        <p class="desc">Something else in mind? Write it down — the occasion, the colours, the flowers you love, your budget — and the florist will tie it just for you.</p>
+        <p class="sig-price tbd" style="margin-top:14px">Price agreed with the florist</p>
+        <label class="custom-note"><span>Your request</span>
+          <textarea id="customText" maxlength="400" placeholder="e.g. A pink and white bouquet for my mother's birthday, roses and peonies, delivered Saturday morning…"></textarea></label>
+        <div class="sig-foot"><button class="btn btn-wa" id="customSend" type="button">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.83 14.06c-.24.68-1.4 1.31-1.93 1.36-.53.05-1.03.24-2.9-.6-2.25-1-3.68-3.32-3.79-3.47-.11-.15-.91-1.21-.91-2.31 0-1.1.58-1.64.78-1.86.2-.22.44-.28.59-.28.15 0 .29 0 .42.01.15.01.34-.06.53.4.2.47.67 1.64.73 1.76.06.12.1.26.02.41-.08.15-.15.25-.3.4-.15.15-.31.33-.44.44-.15.13-.3.28-.13.56.17.28.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.44.29.15.46.13.63-.08.17-.21.73-.85.92-1.14.19-.29.39-.24.65-.15.26.1 1.67.79 1.95.93.29.15.48.22.55.34.07.13.07.73-.17 1.42z"/></svg>
+            Send on WhatsApp</button>
+        </div>
+      </div>
+    </article>
+  </section>
+
+  <!-- ================= COMPOSER ================= -->
+  <section id="composer">
+    <div class="wrap">
+      <div class="sec-head" data-rv>
+        <div>
+          <p class="eyebrow">02 · The composer</p>
+          <h2>Tie your own, <em>stem by stem</em></h2>
+        </div>
+        <p class="sec-note">Every stem you pick grows into the 3D bouquet. Drag to spin it — tap a flower to pull it back out.</p>
+      </div>
+
+      <div class="comp-grid">
+        <div class="stage-wrap" data-rv>
+          <div class="stage empty outline" id="stage">
+            <canvas id="stageCanvas" aria-label="3D bouquet composer — drag to spin, tap a flower to remove it"></canvas>
+            <div class="stage-tools">
+              <button class="tool-b" id="zin" aria-label="Zoom in" title="Zoom in">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></button>
+              <button class="tool-b" id="zout" aria-label="Zoom out" title="Zoom out">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14"/></svg></button>
+              <button class="tool-b" id="spinT" aria-label="Toggle auto-spin" title="Auto-spin">
+                <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.5 9A9 9 0 0 0 5.6 5.6L1 10M23 14l-4.6 4.4A9 9 0 0 1 3.5 15"/></svg></button>
+            </div>
+            <div class="drag-hint" id="stageHint">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 9l-3 3 3 3M9 5l3-3 3 3M15 19l-3 3-3-3M19 9l3 3-3 3M2 12h20M12 2v20"/></svg>
+              Drag to spin · tap a flower to remove it
+            </div>
+            <div class="note-tag" id="stageNote" data-dyn hidden></div>
+            <div class="stage-empty">
+              <b>The wrap is empty</b>
+              <span>Pick stems from the garden — or let the florist choose.</span>
+            </div>
+          </div>
+          <div class="stage-bar">
+            <span id="stemCount" data-dyn>The wrap is empty</span>
+            <small>tap a flower to remove it</small>
+          </div>
+        </div>
+
+        <div class="panel" data-rv style="--d:.1s">
+          <div class="grp">
+            <p class="grp-l"><span>01 — Today's garden</span><span>15 MAD per stem</span></p>
+            <div id="palette" data-dyn></div>
+          </div>
+
+          <div class="grp">
+            <p class="grp-l"><span>02 — Finishing</span><span>always included</span></p>
+            <div class="hrow"><span>Wrap, ribbon &amp; hand-tying</span><i></i><b id="wrapFee">Included</b></div>
+            <div class="hrow"><span>Delivery to your door, anywhere in Tiznit</span><i></i><b id="delivFee">Free</b></div>
+            <p class="fee-note">Red kraft, black ribbon and delivery are always included — the price you see is the price you pay. We agree the exact time with you by WhatsApp or DM.</p>
+            <label class="fld" style="margin-top:18px"><span>Text above the bouquet <b id="topHint" data-dyn style="text-transform:none;letter-spacing:0;font-weight:600">— unlocks from 8 stems</b></span>
+              <input type="text" id="bqTop" maxlength="60" placeholder="e.g. Happy birthday Lalla" disabled></label>
+            <label class="fld"><span>Name your bouquet</span>
+              <input type="text" id="bqName" maxlength="40" placeholder="e.g. For Lalla"></label>
+            <label class="fld"><span>A note for the card</span>
+              <textarea id="bqNote" rows="2" maxlength="160" placeholder="We write it by hand, in any language you like."></textarea></label>
+          </div>
+
+          <div class="comp-actions">
+            <button class="btn" id="diceBtn" title="Let the florist choose">
+              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 3h5v5"/><path d="M4 20 21 3"/><path d="M21 16v5h-5"/><path d="M15 15l6 6"/><path d="M4 4l5 5"/></svg>
+              Florist's choice</button>
+            <button class="btn" id="clearBtn">Clear</button>
+            <button class="btn btn-primary" id="orderBtn">Review order</button>
+          </div>
+          <p class="comp-note">No shop to visit — order here or by WhatsApp, and the bouquet reaches your door in Tiznit within a few hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= ATELIER ================= -->
+  <section id="atelier" class="wrap">
+    <div class="sec-head" data-rv>
+      <div>
+        <p class="eyebrow">03 · The atelier</p>
+        <h2>A souk, a table, <em>a pair of hands</em></h2>
+      </div>
+    </div>
+    <p class="pull" data-rv>"A bouquet should smell like <b>the morning</b> it was bought."</p>
+
+    <div class="at-grid">
+      <div data-rv>
+        <div class="story-cols">
+          <p>Bouquet Fleurs has no shopfront and no window display — it is a small flower studio that moves with the season. At half past six, while the town is still cool, we walk to souk El Had with a wicker basket and choose whatever grows best that day: roses from the Souss plain, tuberose in late summer, gypsophila all year round.</p>
+          <p>Nothing sits in a fridge waiting to wilt. You order by WhatsApp or DM, we tie it the same morning, wrap it in red kraft, and it is at your door before the light turns.</p>
+          <p>We deliver across the whole of Tiznit — the medina, the centre, the newest quarters at the edge of town — and for weddings we cover every table in the city. There is no address to remember; the flowers come to you.</p>
+        </div>
+        <p class="facts">
+          since 2018 <svg class="glyph" viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><g transform="translate(12 12)"><ellipse rx="2.1" ry="8.6"/><ellipse rx="2.1" ry="8.6" transform="rotate(45)"/><ellipse rx="2.1" ry="8.6" transform="rotate(90)"/><ellipse rx="2.1" ry="8.6" transform="rotate(135)"/><circle r="2.3" fill="#F5EEDF"/></g></svg>
+          6:30 souk runs <svg class="glyph" viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><g transform="translate(12 12)"><ellipse rx="2.1" ry="8.6"/><ellipse rx="2.1" ry="8.6" transform="rotate(45)"/><ellipse rx="2.1" ry="8.6" transform="rotate(90)"/><ellipse rx="2.1" ry="8.6" transform="rotate(135)"/><circle r="2.3" fill="#F5EEDF"/></g></svg>
+          4 200+ bouquets tied <svg class="glyph" viewBox="0 0 24 24" width="12" height="12" fill="currentColor" aria-hidden="true"><g transform="translate(12 12)"><ellipse rx="2.1" ry="8.6"/><ellipse rx="2.1" ry="8.6" transform="rotate(45)"/><ellipse rx="2.1" ry="8.6" transform="rotate(90)"/><ellipse rx="2.1" ry="8.6" transform="rotate(135)"/><circle r="2.3" fill="#F5EEDF"/></g></svg>
+          delivered to your door
+        </p>
+      </div>
+
+      <div data-rv style="--d:.12s">
+        <div class="map-card">
+          <h4>Delivery — all of Tiznit</h4>
+          <svg viewBox="0 0 340 300">
+            <path d="M74 0 C 60 60 84 110 66 170 C 52 220 78 262 64 300 L0 300 L0 0 Z" fill="#E0E5D3"/>
+            <path d="M74 0 C 60 60 84 110 66 170 C 52 220 78 262 64 300" fill="none" stroke="#2A3320" stroke-width="1.5"/>
+            <g stroke="#AEBBA0" stroke-width="1.4" fill="none" stroke-dasharray="1 6" stroke-linecap="round">
+              <path d="M14 70 q 10 6 20 0 q 10 -6 20 0"/><path d="M8 150 q 10 6 20 0 q 10 -6 20 0"/><path d="M16 236 q 10 6 20 0 q 10 -6 20 0"/>
+            </g>
+            <text x="26" y="152" transform="rotate(-76 26 152)" style="font:700 10px Karla;letter-spacing:3px" fill="#9AA48B">ATLANTIQUE</text>
+            <circle cx="192" cy="146" r="102" fill="rgba(185,134,47,.07)" stroke="#B9862F" stroke-width="1.3" stroke-dasharray="4 7"/>
+            <g fill="#EDE2CC" stroke="#2A3320" stroke-width="1" opacity=".55">
+              <path d="M138 92 l0 -9 a7 7 0 0 1 14 0 l0 9 Z"/>
+              <path d="M242 104 l0 -8 a6 6 0 0 1 12 0 l0 8 Z"/>
+              <path d="M118 190 l0 -8 a6 6 0 0 1 12 0 l0 8 Z"/>
+              <path d="M258 190 l0 -9 a7 7 0 0 1 14 0 l0 9 Z"/>
+            </g>
+            <g transform="translate(192 144) scale(1.3)">
+              <path d="M-7 9 L-7 -1 A7 7 0 0 1 7 -1 L7 9 Z" fill="#B4433A" stroke="#2A3320" stroke-width=".8"/>
+              <line x1="-11" y1="9" x2="11" y2="9" stroke="#2A3320" stroke-width="1.4"/>
+              <text y="24" text-anchor="middle" style="font:700 10px Karla;letter-spacing:1.6px" fill="#B4433A">TIZNIT</text>
+            </g>
+            <text x="192" y="272" text-anchor="middle" style="font:700 10px Karla;letter-spacing:2px" fill="#B9862F">ONE ZONE — ALL OF TIZNIT</text>
+          </svg>
+          <p id="mapInfo">We deliver anywhere inside the circle — the whole town of Tiznit. Order by WhatsApp or DM and the bouquet comes to your door — delivery is free.</p>
+        </div>
+        <div class="hours-card">
+          <h4>Order &amp; delivery hours</h4>
+          <div class="hrow"><span>Mon — Sat</span><i></i><b>09:00 — 20:00</b></div>
+          <div class="hrow"><span>Sunday</span><i></i><b>10:00 — 13:00</b></div>
+          <div class="hrow"><span>Ramadan</span><i></i><b>11:00 — 19:00</b></div>
+          <p class="hours-note">We answer WhatsApp and DMs during these hours. Fresh stock lands every morning around 8:00 — the best stems go fast.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================= INSTAGRAM GALLERY ================= -->
+  <!-- HOW TO SHOW THE REAL PHOTOS (no code editing):
+       save photos from the profile as photo1.jpg, photo2.jpg ... photo6.jpg
+       in the SAME FOLDER as this file — each one becomes a tile automatically.
+       No photos saved? Then this section shows a link to Instagram instead. -->
+  <section id="instagram" class="wrap">
+    <div class="sec-head" data-rv>
+      <div>
+        <p class="eyebrow">04 · From the studio</p>
+        <h2>Straight from <em>Instagram</em></h2>
+      </div>
+      <p class="sec-note">Tap any photo to open @bouquetfleurs_tiznit and order in a DM.</p>
+    </div>
+    <div class="ig-grid" id="igGrid" data-rv></div>
+    <div class="ig-empty" id="igEmpty" data-rv hidden>
+      <b>The gallery lives on Instagram</b>
+      Every bouquet we tie is posted there first — browse the feed and message us the one you like.
+      <br>
+      <a class="btn btn-primary" href="https://www.instagram.com/bouquetfleurs_tiznit/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+        Open @bouquetfleurs_tiznit</a>
+    </div>
+    <p class="ig-more" data-rv>
+      <a class="lnk" href="https://www.instagram.com/bouquetfleurs_tiznit/" target="_blank" rel="noopener">See every bouquet on Instagram
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17 17 7M8 7h9v9"/></svg></a>
+    </p>
+  </section>
+
+  <!-- ================= CONTACT ================= -->
+  <section id="contact" style="background:var(--card);border-top:1.5px solid var(--ink)">
+    <div class="wrap">
+      <div class="sec-head" data-rv>
+        <div>
+          <p class="eyebrow">05 · Contact</p>
+          <h2>Say hello, <em>get flowers</em></h2>
+        </div>
+        <p class="sec-note">One message is enough — tell us the occasion, your address in Tiznit and the hour, and we take care of the rest.</p>
+      </div>
+
+      <div class="contact-grid">
+        <div class="contact-card wa" data-rv>
+          <span class="cc-tag">Fastest</span>
+          <div class="cc-ic">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.83 14.06c-.24.68-1.4 1.31-1.93 1.36-.53.05-1.03.24-2.9-.6-2.25-1-3.68-3.32-3.79-3.47-.11-.15-.91-1.21-.91-2.31 0-1.1.58-1.64.78-1.86.2-.22.44-.28.59-.28.15 0 .29 0 .42.01.15.01.34-.06.53.4.2.47.67 1.64.73 1.76.06.12.1.26.02.41-.08.15-.15.25-.3.4-.15.15-.31.33-.44.44-.15.13-.3.28-.13.56.17.28.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.44.29.15.46.13.63-.08.17-.21.73-.85.92-1.14.19-.29.39-.24.65-.15.26.1 1.67.79 1.95.93.29.15.48.22.55.34.07.13.07.73-.17 1.42z"/></svg>
+          </div>
+          <h3>WhatsApp</h3>
+          <a class="cc-handle wa" href="https://wa.me/212718618633" target="_blank" rel="noopener">+212 7 18 61 86 33</a>
+          <p>The quickest way to order — send a photo of a bouquet you like, or describe the occasion and your budget. We answer during order hours.</p>
+          <a class="btn btn-wa" href="https://wa.me/212718618633?text=Hello%20Bouquet%20Fleurs!%20%F0%9F%8C%B8" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.83 14.06c-.24.68-1.4 1.31-1.93 1.36-.53.05-1.03.24-2.9-.6-2.25-1-3.68-3.32-3.79-3.47-.11-.15-.91-1.21-.91-2.31 0-1.1.58-1.64.78-1.86.2-.22.44-.28.59-.28.15 0 .29 0 .42.01.15.01.34-.06.53.4.2.47.67 1.64.73 1.76.06.12.1.26.02.41-.08.15-.15.25-.3.4-.15.15-.31.33-.44.44-.15.13-.3.28-.13.56.17.28.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.44.29.15.46.13.63-.08.17-.21.73-.85.92-1.14.19-.29.39-.24.65-.15.26.1 1.67.79 1.95.93.29.15.48.22.55.34.07.13.07.73-.17 1.42z"/></svg>
+            Message on WhatsApp</a>
+        </div>
+
+        <div class="contact-card ig" data-rv style="--d:.1s">
+          <span class="cc-tag ig">@bouquetfleurs_tiznit</span>
+          <div class="cc-ic">
+            <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          </div>
+          <h3>Instagram</h3>
+          <a class="cc-handle" href="https://www.instagram.com/bouquetfleurs_tiznit/" target="_blank" rel="noopener">@bouquetfleurs_tiznit</a>
+          <p>Every bouquet we tie is posted there first — browse the feed, save your favourites and order the one you like in a DM.</p>
+          <a class="btn" href="https://www.instagram.com/bouquetfleurs_tiznit/" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+            Open Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- ================= FLOATING BUTTONS ================= -->
+<div class="float-stack">
+  <a class="wa-float" href="https://wa.me/212718618633?text=Hello%20Bouquet%20Fleurs!%20%F0%9F%8C%B8" target="_blank" rel="noopener" aria-label="WhatsApp">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.83 14.06c-.24.68-1.4 1.31-1.93 1.36-.53.05-1.03.24-2.9-.6-2.25-1-3.68-3.32-3.79-3.47-.11-.15-.91-1.21-.91-2.31 0-1.1.58-1.64.78-1.86.2-.22.44-.28.59-.28.15 0 .29 0 .42.01.15.01.34-.06.53.4.2.47.67 1.64.73 1.76.06.12.1.26.02.41-.08.15-.15.25-.3.4-.15.15-.31.33-.44.44-.15.13-.3.28-.13.56.17.28.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.44.29.15.46.13.63-.08.17-.21.73-.85.92-1.14.19-.29.39-.24.65-.15.26.1 1.67.79 1.95.93.29.15.48.22.55.34.07.13.07.73-.17 1.42z"/></svg>
+    <span class="wa-label">WhatsApp</span></a>
+  <a class="ig-float" href="https://www.instagram.com/bouquetfleurs_tiznit/" target="_blank" rel="noopener" aria-label="Instagram">
+    <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+    <span class="ig-label">Instagram</span></a>
+</div>
+
+<!-- ================= FOOTER ================= -->
+<footer>
+  <div class="wrap">
+    <div class="ft-grid">
+      <div>
+        <img class="ft-ava js-ava" alt="Bouquet Fleurs Tiznit" referrerpolicy="no-referrer">
+        <h4>Bouquet Fleurs</h4>
+        <p>An online flower studio in Tiznit, Morocco. Cut at dawn in souk El Had, tied by hand, delivered to your door the same morning.</p>
+        <a class="btn btn-inv ft-ig" href="https://www.instagram.com/bouquetfleurs_tiznit/" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/></svg>
+          @bouquetfleurs_tiznit</a>
+      </div>
+      <div>
+        <h4>Order &amp; delivery</h4>
+        <div class="hrow-f"><span>Mon — Sat</span><i></i><span>09:00 — 20:00</span></div>
+        <div class="hrow-f"><span>Sunday</span><i></i><span>10:00 — 13:00</span></div>
+        <div class="hrow-f"><span>Red kraft, wrap &amp; ribbon</span><i></i><span>Included</span></div>
+        <div class="hrow-f"><span>Delivery in Tiznit</span><i></i><span>Free</span></div>
+        <p style="margin-top:14px;font-size:13.5px">Fresh stock lands every morning around 8:00 — the best stems go fast.</p>
+      </div>
+      <div>
+        <h4>Talk to the florist</h4>
+        <p>One message is enough — tell us the occasion, your address in Tiznit and the hour.</p>
+        <p class="ft-num">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.83 14.06c-.24.68-1.4 1.31-1.93 1.36-.53.05-1.03.24-2.9-.6-2.25-1-3.68-3.32-3.79-3.47-.11-.15-.91-1.21-.91-2.31 0-1.1.58-1.64.78-1.86.2-.22.44-.28.59-.28.15 0 .29 0 .42.01.15.01.34-.06.53.4.2.47.67 1.64.73 1.76.06.12.1.26.02.41-.08.15-.15.25-.3.4-.15.15-.31.33-.44.44-.15.13-.3.28-.13.56.17.28.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.44.29.15.46.13.63-.08.17-.21.73-.85.92-1.14.19-.29.39-.24.65-.15.26.1 1.67.79 1.95.93.29.15.48.22.55.34.07.13.07.73-.17 1.42z"/></svg>
+          <a href="https://wa.me/212718618633" target="_blank" rel="noopener">+212 7 18 61 86 33</a></p>
+        <a class="btn btn-wa ft-wa" href="https://wa.me/212718618633?text=Hello%20Bouquet%20Fleurs!%20%F0%9F%8C%B8" target="_blank" rel="noopener">Order on WhatsApp</a>
+        <p class="ft-dm">or DM <a href="https://www.instagram.com/bouquetfleurs_tiznit/" target="_blank" rel="noopener">@bouquetfleurs_tiznit</a></p>
+      </div>
+    </div>
+    <div class="mega" aria-hidden="true">Bouquet<span>Fleurs</span></div>
+    <div class="ft-bottom">
+      <span>© <span id="yr"></span> Bouquet Fleurs · Tiznit — Souss-Massa, Morocco</span>
+      <span><a href="#top">Back to top ↑</a></span>
+    </div>
+  </div>
+</footer>
+
+<!-- ================= ORDER MODAL ================= -->
+<div class="modal" id="orderModal" hidden>
+  <div class="modal-bg" data-close></div>
+  <div class="modal-card" role="dialog" aria-modal="true" aria-label="Review your order">
+    <button class="modal-x" data-close aria-label="Close">
+      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+    <p class="eyebrow">Your order</p>
+    <h3>Review &amp; send</h3>
+    <div id="mLines" data-dyn></div>
+    <p id="mMeta" data-dyn></p>
+    <div class="m-actions">
+      <a class="btn btn-wa" id="waSend" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12.04 2c-5.46 0-9.91 4.45-9.91 9.91 0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91S17.5 2 12.04 2zm5.83 14.06c-.24.68-1.4 1.31-1.93 1.36-.53.05-1.03.24-2.9-.6-2.25-1-3.68-3.32-3.79-3.47-.11-.15-.91-1.21-.91-2.31 0-1.1.58-1.64.78-1.86.2-.22.44-.28.59-.28.15 0 .29 0 .42.01.15.01.34-.06.53.4.2.47.67 1.64.73 1.76.06.12.1.26.02.41-.08.15-.15.25-.3.4-.15.15-.31.33-.44.44-.15.13-.3.28-.13.56.17.28.75 1.24 1.61 2.01 1.11.99 2.04 1.3 2.33 1.44.29.15.46.13.63-.08.17-.21.73-.85.92-1.14.19-.29.39-.24.65-.15.26.1 1.67.79 1.95.93.29.15.48.22.55.34.07.13.07.73-.17 1.42z"/></svg>
+        Send on WhatsApp</a>
+      <button class="btn" id="copyOrder">Copy details</button>
+    </div>
+    <p class="m-note">Sending opens WhatsApp with your order ready to go — just press <b>send</b>. We reply during order hours (Mon–Sat 09:00–20:00).</p>
+  </div>
+</div>
+
+<div id="toasts" data-dyn aria-live="polite"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* =====================================================
+   BOUQUET FLEURS — complete logic
+   Edit here: FLOWERS (stems & prices), WA_NUM (WhatsApp),
+   photo1..6.jpg for the gallery.
+   Paper = RED kraft (free, no picker shown) · ribbon = black · delivery free.
+   ===================================================== */
+'use strict';
+const $  = s => document.querySelector(s);
+const $$ = s => [...document.querySelectorAll(s)];
+const WA_NUM = '212718618633';
+const IG_URL = 'https://www.instagram.com/bouquetfleurs_tiznit/';
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ---------- HTML-escape helper (XSS protection for user-entered text) ---------- */
+function escHtml(str){
+  return String(str).replace(/[&<>"']/g, c => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  }[c]));
+}
+
+/* ---------- language (EN / AR) ---------- */
+let LANG='en';
+try{ LANG=localStorage.getItem('bf_lang')||(/^ar/i.test(navigator.language||'')?'ar':'en'); }catch(e){}
+const AR = {
+ "Signatures": "باقاتنا المميزة",
+ "Composer": "صمّم باقتك",
+ "The atelier": "المشغل",
+ "Instagram": "إنستغرام",
+ "Contact": "اتصل بنا",
+ "WhatsApp — +212 7 18 61 86 33": "واتساب — +212 7 18 61 86 33",
+ "Compose": "صمّم",
+ "Menu": "القائمة",
+ "Fleuriste en ligne · Tiznit — Souss-Massa, Morocco": "محل ورد إلكتروني · تيزنيت — سوس ماسة، المغرب",
+ "Flowers from": "ورود من",
+ "the souk": "السوق",
+ ",": "،",
+ "tied by hand": "تُربط باليد",
+ "and brought to": "وتصل إلى",
+ "your door": "باب بيتك",
+ "Bouquet Fleurs is an online flower studio in Tiznit — no shopfront, no counter. We buy at dawn in souk El Had, tie the same morning, and deliver anywhere in the city before the light turns.": "Bouquet Fleurs محل ورد إلكتروني في تيزنيت — بلا واجهة محل ولا كونتوار. نشتري الورد فجراً من سوق الأحد، نربط الباقات في الصباح نفسه، ونوصلها إلى أي مكان في المدينة قبل أن يتغيّر الضوء.",
+ "Compose your bouquet": "صمّم باقتك",
+ "Talk to the florist": "تواصل مع بائع الورد",
+ "fresh every morning": "طازجة كل صباح",
+ "since 2018": "منذ 2018",
+ "order by WhatsApp or DM": "اطلب عبر واتساب أو رسالة خاصة",
+ "3D bouquet — drag to spin, hover a flower to see its name": "باقة ثلاثية الأبعاد — اسحب لتدويرها، مرّر المؤشر على وردة لترى اسمها",
+ "Drag to spin the bouquet": "اسحب لتدوير الباقة",
+ "Picked this morning: Souss roses, peonies & white anemones —": "قُطفت هذا الصباح: ورد سوس، فاوانيا وشقائق النعمان البيضاء —",
+ "compose one like it": "صمّم باقة مثلها",
+ "01 · The signatures": "01 · باقاتنا المميزة",
+ "Bouquets we tie": "باقات نربطها",
+ "every day": "كل يوم",
+ "Real 3D models, tied stem by stem and slowly turning. Every stem is 15 MAD — the price you see is the price you pay, with red kraft, black ribbon, hand-tying and delivery all included.": "نماذج ثلاثية الأبعاد حقيقية، تُربط ساقاً ساقاً وتدور ببطء. كل ساق بـ 15 درهماً — السعر الذي تراه هو السعر الذي تدفعه، والورق الأحمر (الكرافت) والشريط الأسود والربط باليد والتوصيل كلها مشمولة.",
+ "3D preview — Le Rose de Tiznit": "معاينة ثلاثية الأبعاد — Le Rose de Tiznit",
+ "3D preview — Jardin du Souk": "معاينة ثلاثية الأبعاد — Jardin du Souk",
+ "3D preview — Nuit de la Médina": "معاينة ثلاثية الأبعاد — Nuit de la Médina",
+ "3D preview — Sur mesure": "معاينة ثلاثية الأبعاد — حسب الطلب",
+ "N°01 — bestseller": "رقم 01 — الأكثر مبيعاً",
+ "Our bestseller since day one — five deep Souss roses lifted by a cloud of gypsophila, tied low and generous, the way Tiznit likes it.": "باقتنا الأكثر مبيعاً منذ اليوم الأول — خمس وردات سوس داكنة يعلوها غيم من الجبسوفيلا، مربوطة منخفضة وسخيّة، كما تحبها تيزنيت.",
+ "5 roses · 3 gypsophila · 2 eucalyptus": "5 ورود · 3 جبسوفيلا · 2 أوكالبتوس",
+ "150 MAD": "150 درهم",
+ "Compose this": "صمّم هذه",
+ "N°02 — warm & loud": "رقم 02 — دافئة وملوّنة",
+ "Warm as a mid-morning in souk El Had: late peonies and golden gerberas with tulips leaning in, plenty of eucalyptus, wrapped in red kraft with a black ribbon.": "دافئة كضحى في سوق الأحد: فاوانيا متأخرة وجربيرا ذهبية تتكئ عليها زهور التوليب، مع وفرة من الأوكالبتوس، ملفوفة بورق كرافت أحمر وشريط أسود.",
+ "2 peonies · 3 gerberas · 2 tulips · 3 eucalyptus": "2 فاوانيا · 3 جربيرا · 2 توليب · 3 أوكالبتوس",
+ "N°03 — quiet & dark": "رقم 03 — هادئة وداكنة",
+ "White anemones with ink-dark hearts, two quiet roses, gypsophila like stars over the medina — for evenings, vows and long tables.": "شقائق نعمان بيضاء بقلوب داكنة كالحبر، ووردتان هادئتان، وجبسوفيلا كالنجوم فوق المدينة القديمة — للأمسيات والعهود والموائد الطويلة.",
+ "4 anemones · 2 roses · 3 gypsophila": "4 شقائق النعمان · 2 ورود · 3 جبسوفيلا",
+ "135 MAD": "135 درهم",
+ "N°04 — made for you": "رقم 04 — على مقاسك",
+ "Sur mesure": "حسب الطلب",
+ "Something else in mind? Write it down — the occasion, the colours, the flowers you love, your budget — and the florist will tie it just for you.": "في بالك شيء آخر؟ اكتبه — المناسبة، الألوان، الورود التي تحبها، ميزانيتك — وسيربطها لك بائع الورد خصيصاً.",
+ "Price agreed with the florist": "السعر يُتفق عليه مع بائع الورد",
+ "Your request": "طلبك",
+ "e.g. A pink and white bouquet for my mother's birthday, roses and peonies, delivered Saturday morning…": "مثال: باقة وردية وبيضاء لعيد ميلاد أمي، ورد وفاوانيا، تُسلَّم صباح السبت…",
+ "Send on WhatsApp": "أرسل عبر واتساب",
+ "02 · The composer": "02 · صمّم باقتك",
+ "Tie your own,": "اربط باقتك بنفسك،",
+ "stem by stem": "ساقاً ساقاً",
+ "Every stem you pick grows into the 3D bouquet. Drag to spin it — tap a flower to pull it back out.": "كل ساق تختارها تنمو داخل الباقة ثلاثية الأبعاد. اسحب لتدويرها — واضغط على وردة لإخراجها.",
+ "3D bouquet composer — drag to spin, tap a flower to remove it": "مُصمّم الباقة ثلاثي الأبعاد — اسحب للتدوير، اضغط على وردة لإزالتها",
+ "Zoom in": "تكبير",
+ "Zoom out": "تصغير",
+ "Toggle auto-spin": "تشغيل/إيقاف الدوران التلقائي",
+ "Auto-spin": "دوران تلقائي",
+ "Drag to spin · tap a flower to remove it": "اسحب للتدوير · اضغط على وردة لإزالتها",
+ "The wrap is empty": "الغلاف فارغ",
+ "Pick stems from the garden — or let the florist choose.": "اختر ساقاتك من الحديقة — أو اترك الاختيار لبائع الورد.",
+ "tap a flower to remove it": "اضغط على وردة لإزالتها",
+ "01 — Today's garden": "01 — حديقة اليوم",
+ "15 MAD per stem": "15 درهم للساق",
+ "02 — Finishing": "02 — اللمسات الأخيرة",
+ "always included": "مشمولة دائماً",
+ "Wrap, ribbon & hand-tying": "التغليف والشريط والربط باليد",
+ "Included": "مشمول",
+ "Delivery to your door, anywhere in Tiznit": "التوصيل إلى باب بيتك، في أي مكان بتيزنيت",
+ "Delivery to your door, Tiznit": "التوصيل إلى باب بيتك، تيزنيت",
+ "Free": "مجاني",
+ "Red kraft, black ribbon and delivery are always included — the price you see is the price you pay. We agree the exact time with you by WhatsApp or DM.": "الورق الأحمر (الكرافت) والشريط الأسود والتوصيل مشمولة دائماً — السعر الذي تراه هو السعر الذي تدفعه. نتفق معك على الوقت بالضبط عبر واتساب أو رسالة خاصة.",
+ "Text above the bouquet": "نص فوق الباقة",
+ "e.g. Happy birthday Lalla": "مثال: عيد ميلاد سعيد يا لالة",
+ "Name your bouquet": "اسم باقتك",
+ "e.g. For Lalla": "مثال: إلى لالة",
+ "A note for the card": "رسالة للبطاقة",
+ "We write it by hand, in any language you like.": "نكتبها بخط اليد، بأي لغة تريدها.",
+ "Let the florist choose": "اترك الاختيار لبائع الورد",
+ "Florist's choice": "اختيار بائع الورد",
+ "Clear": "مسح",
+ "Review order": "مراجعة الطلب",
+ "No shop to visit — order here or by WhatsApp, and the bouquet reaches your door in Tiznit within a few hours.": "لا حاجة لزيارة محل — اطلب من هنا أو عبر واتساب، وتصل الباقة إلى باب بيتك في تيزنيت خلال ساعات قليلة.",
+ "03 · The atelier": "03 · المشغل",
+ "A souk, a table,": "سوق، طاولة،",
+ "a pair of hands": "ويدان ماهرتان",
+ "“A bouquet should smell like": "«يجب أن تفوح الباقة برائحة",
+ "the morning": "الصباح",
+ "it was bought.”": "الذي اشتُريت فيه.»",
+ "Bouquet Fleurs has no shopfront and no window display — it is a small flower studio that moves with the season. At half past six, while the town is still cool, we walk to souk El Had with a wicker basket and choose whatever grows best that day: roses from the Souss plain, tuberose in late summer, gypsophila all year round.": "Bouquet Fleurs بلا واجهة محل ولا عرض زجاجي — إنه مشغل صغير للورد يتبع الفصول. عند السادسة والنصف، والمدينة ما زالت باردة، نمشي إلى سوق الأحد بسلة من الخوص ونختار أفضل ما ينمو في ذلك اليوم: ورد من سهل سوس، وتيوبروز في أواخر الصيف، وجبسوفيلا طوال السنة.",
+ "Nothing sits in a fridge waiting to wilt. You order by WhatsApp or DM, we tie it the same morning, wrap it in red kraft, and it is at your door before the light turns.": "لا شيء ينتظر الذبول في الثلاجة. تطلب عبر واتساب أو رسالة خاصة، نربطها في الصباح نفسه، نلفّها بورق كرافت أحمر، وتصل إلى بابك قبل أن يتغيّر الضوء.",
+ "We deliver across the whole of Tiznit — the medina, the centre, the newest quarters at the edge of town — and for weddings we cover every table in the city. There is no address to remember; the flowers come to you.": "نوصّل في كل تيزنيت — المدينة القديمة، والمركز، وأحدث الأحياء على أطراف المدينة — وفي الأعراس نزيّن كل طاولة في المدينة. لا عنوان عليك أن تتذكره؛ الورد هو الذي يأتيك.",
+ "6:30 souk runs": "جولات السوق عند 6:30",
+ "4 200+ bouquets tied": "أكثر من 4 200 باقة مربوطة",
+ "delivered to your door": "تصل إلى باب بيتك",
+ "Delivery — all of Tiznit": "التوصيل — كل تيزنيت",
+ "ATLANTIQUE": "الأطلسي",
+ "TIZNIT": "تيزنيت",
+ "ONE ZONE — ALL OF TIZNIT": "منطقة واحدة — كل تيزنيت",
+ "We deliver anywhere inside the circle — the whole town of Tiznit. Order by WhatsApp or DM and the bouquet comes to your door — delivery is free.": "نوصّل إلى أي مكان داخل الدائرة — أي كامل مدينة تيزنيت. اطلب عبر واتساب أو رسالة خاصة وتصل الباقة إلى بابك — التوصيل مجاني.",
+ "Order & delivery hours": "ساعات الطلب والتوصيل",
+ "Mon — Sat": "الإثنين — السبت",
+ "Sunday": "الأحد",
+ "Ramadan": "رمضان",
+ "We answer WhatsApp and DMs during these hours. Fresh stock lands every morning around 8:00 — the best stems go fast.": "نردّ على واتساب والرسائل الخاصة خلال هذه الساعات. يصل الورد الطازج كل صباح نحو الساعة 8:00 — وأجمل السيقان تنفد بسرعة.",
+ "04 · From the studio": "04 · من الاستوديو",
+ "Straight from": "مباشرة من",
+ "Tap any photo to open @bouquetfleurs_tiznit and order in a DM.": "اضغط على أي صورة لفتح @bouquetfleurs_tiznit واطلب عبر رسالة خاصة.",
+ "The gallery lives on Instagram": "المعرض موجود على إنستغرام",
+ "Every bouquet we tie is posted there first — browse the feed and message us the one you like.": "كل باقة نربطها تُنشر هناك أولاً — تصفّح الصفحة وراسلنا بالباقة التي أعجبتك.",
+ "Open @bouquetfleurs_tiznit": "افتح @bouquetfleurs_tiznit",
+ "See every bouquet on Instagram": "شاهد كل باقاتنا على إنستغرام",
+ "05 · Contact": "05 · اتصل بنا",
+ "Say hello,": "قل مرحباً،",
+ "get flowers": "واستلم ورداً",
+ "One message is enough — tell us the occasion, your address in Tiznit and the hour, and we take care of the rest.": "رسالة واحدة تكفي — أخبرنا بالمناسبة وعنوانك في تيزنيت والساعة، ونتكفل بالباقي.",
+ "Fastest": "الأسرع",
+ "WhatsApp": "واتساب",
+ "The quickest way to order — send a photo of a bouquet you like, or describe the occasion and your budget. We answer during order hours.": "أسرع طريقة للطلب — أرسل صورة باقة أعجبتك، أو صف المناسبة وميزانيتك. نردّ خلال ساعات الطلب.",
+ "Message on WhatsApp": "راسلنا على واتساب",
+ "Every bouquet we tie is posted there first — browse the feed, save your favourites and order the one you like in a DM.": "كل باقة نربطها تُنشر هناك أولاً — تصفّح الصفحة، احفظ باقاتك المفضلة واطلب التي أعجبتك عبر رسالة خاصة.",
+ "Open Instagram": "افتح إنستغرام",
+ "An online flower studio in Tiznit, Morocco. Cut at dawn in souk El Had, tied by hand, delivered to your door the same morning.": "محل ورد إلكتروني في تيزنيت، المغرب. يُقطف فجراً في سوق الأحد، ويُربط باليد، ويصل إلى بابك في الصباح نفسه.",
+ "Order & delivery": "الطلب والتوصيل",
+ "Red kraft, wrap & ribbon": "ورق كرافت أحمر، تغليف وشريط",
+ "Delivery in Tiznit": "التوصيل في تيزنيت",
+ "Fresh stock lands every morning around 8:00 — the best stems go fast.": "يصل الورد الطازج كل صباح نحو الساعة 8:00 — وأجمل السيقان تنفد بسرعة.",
+ "One message is enough — tell us the occasion, your address in Tiznit and the hour.": "رسالة واحدة تكفي — أخبرنا بالمناسبة وعنوانك في تيزنيت والساعة.",
+ "Order on WhatsApp": "اطلب عبر واتساب",
+ "or DM": "أو رسالة خاصة",
+ "Bouquet Fleurs · Tiznit — Souss-Massa, Morocco": "Bouquet Fleurs · تيزنيت — سوس ماسة، المغرب",
+ "Back to top ↑": "العودة إلى الأعلى ↑",
+ "Review your order": "مراجعة طلبك",
+ "Close": "إغلاق",
+ "Your order": "طلبك",
+ "Review & send": "راجع وأرسل",
+ "Copy details": "نسخ التفاصيل",
+ "Sending opens WhatsApp with your order ready to go — just press": "عند الإرسال يُفتح واتساب وطلبك جاهز — فقط اضغط",
+ "send": "إرسال",
+ ". We reply during order hours (Mon–Sat 09:00–20:00).": ". نردّ خلال ساعات الطلب (الإثنين–السبت 09:00–20:00).",
+ "MAD / stem": "درهم / الساق",
+ "Total": "المجموع",
+ "Red kraft": "كرافت أحمر",
+ "Your wrap is empty — pick some stems first 🌷": "الغلاف فارغ — اختر بعض الساقات أولاً 🌷",
+ "Cleared — the wrap is empty": "تم المسح — الغلاف فارغ",
+ "Order copied — paste it in a DM 📋": "تم نسخ الطلب — الصقه في رسالة خاصة 📋",
+ "Copy failed — select it manually": "فشل النسخ — حدّد النص يدوياً",
+ "Write what you have in mind first 🌷": "اكتب ما تفكر فيه أولاً 🌷",
+ "— shown above your bouquet": "— يظهر فوق باقتك",
+ "Souss roses": "ورد سوس",
+ "Peonies": "فاوانيا",
+ "White anemones": "شقائق النعمان البيضاء",
+ "Gerberas": "جربيرا",
+ "Tulips": "توليب",
+ "Cut at dawn": "يُقطف فجراً",
+ "Delivered in Tiznit": "يُوصَّل في تيزنيت",
+ "Gypsophila": "جبسوفيلا",
+ "Eucalyptus": "أوكالبتوس",
+ "Tuberose": "تيوبروز"
+};
+const AR_NAME = {"rose": "وردة سوس", "peony": "فاوانيا", "anemone": "شقائق النعمان البيضاء", "gerbera": "جربيرا ذهبية", "tulip": "توليب السوق", "gyp": "جبسوفيلا", "euca": "أوكالبتوس", "tuberose": "تيوبروز"};
+const AR_TAG = {"bestseller": "الأكثر مبيعاً", "seasonal": "موسمية", "always fresh": "طازجة دائماً"};
+const tr = s => (LANG==='ar' && AR[s]) || s;
+
+/* ---------- stems & prices (MAD per stem) ---------- */
+const STEM_PRICE = 15;   // every flower costs the same: 15 MAD per stem
+const FLOWERS = {
+  rose:    {name:'Souss rose',     sub:"Rosa 'Souss'",          price:STEM_PRICE, h:1.55, s:.95, a:0xB4433A, b:0x7E2A22, sw:['#B4433A','#8E2F27'], tag:'bestseller'},
+  peony:   {name:'Peony',          sub:'Paeonia lactiflora',    price:STEM_PRICE, h:1.45, s:1.15, a:0xE8A0A8, b:0xC97B86, sw:['#E8A0A8','#D77E8C'], tag:'seasonal'},
+  anemone: {name:'White anemone',  sub:'Anemone coronaria',     price:STEM_PRICE, h:1.50, s:.95, a:0xF4EFE6, b:0x2E2417, sw:['#F4EFE6','#2E2417']},
+  gerbera: {name:'Golden gerbera', sub:'Gerbera jamesonii',     price:STEM_PRICE, h:1.35, s:1.0,  a:0xE9A13B, b:0x8A5A22, sw:['#E9A13B','#C97F22']},
+  tulip:   {name:'Souk tulip',     sub:'Tulipa gesneriana',     price:STEM_PRICE, h:1.42, s:.90,  a:0xCE6A4A, b:0xB4433A, sw:['#CE6A4A','#B4433A']},
+  gyp:     {name:'Gypsophila',     sub:'Gypsophila paniculata', price:STEM_PRICE, h:1.78, s:.80,  a:0xFBF7EE, b:0xE8DFC9, sw:['#FBF7EE','#E8DFC9'], tag:'always fresh'},
+  euca:    {name:'Eucalyptus',     sub:'Eucalyptus cinerea',    price:STEM_PRICE, h:1.88, s:1.0,  a:0x7C9261, b:0x5E7245, sw:['#7C9261','#5E7245']},
+  tuberose:{name:'Tuberose',       sub:'Polianthes tuberosa',   price:STEM_PRICE, h:1.70, s:.80,  a:0xF6F1E3, b:0xD9CBA8, sw:['#F6F1E3','#D9CBA8']}
+};
+/* paper: RED only — free, no picker in the UI. Ribbon: black, fixed. */
+const WRAP_COLOR   = 0xB4433A;            // red kraft (brand red)
+const WRAP_LABEL   = 'Red kraft';
+const RIBBON_COLOR = 0x1A1A1A;            // black
+const WRAP_LINE  = {label:'Wrap, ribbon & hand-tying', value:'Included'};
+const DELIV_LINE = {label:'Delivery to your door, Tiznit', value:'Free'};
+
+/* ---------- tiny UI helpers ---------- */
+function toast(msg, ms=2600){
+  const t=document.createElement('div'); t.className='toast'; t.textContent=msg;
+  $('#toasts').appendChild(t);
+  setTimeout(()=>{ t.classList.add('go'); setTimeout(()=>t.remove(), 500); }, ms);
+}
+const fmt = n => n + (LANG==='ar' ? ' درهم' : ' MAD');
+const fname = k => (LANG==='ar' && AR_NAME[k]) || FLOWERS[k].name;
+const ftag  = t => (LANG==='ar' && AR_TAG[t]) || t;
+
+/* ---------- header / menu / reveal / ticker / year / avatar ---------- */
+addEventListener('scroll', ()=> $('#hdr').classList.toggle('scrolled', scrollY > 8), {passive:true});
+const mBtn=$('#menuBtn'), mMenu=$('#mmenu');
+mBtn.addEventListener('click', ()=>{ mBtn.classList.toggle('x'); mMenu.classList.toggle('open'); });
+mMenu.addEventListener('click', e=>{ if(e.target.tagName==='A'){ mBtn.classList.remove('x'); mMenu.classList.remove('open'); } });
+
+const rvIO = new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); rvIO.unobserve(e.target);} }), {threshold:.12});
+ $$('[data-rv]').forEach(el=>rvIO.observe(el));
+
+function renderTicker(){
+  const items=['Souss roses','Gypsophila','Eucalyptus','Peonies','White anemones','Gerberas','Tulips','Tuberose','Cut at dawn','Delivered in Tiznit'].map(tr);
+  $('#tickerTrack').innerHTML = items.concat(items).map(t=>`<span class="tk">${t}</span><span class="glyph">❋</span>`).join('');
+}
+ $('#yr').textContent = new Date().getFullYear();
+
+ $$('.js-ava').forEach(im=>{ im.onerror=()=>im.style.display='none'; im.src='https://unavatar.io/instagram/bouquetfleurs_tiznit'; });
+
+/* ---------- Instagram gallery: photo1.jpg … photo6.jpg ---------- */
+(function igGrid(){
+  const grid=$('#igGrid'), empty=$('#igEmpty');
+  let done=0, ok=0;
+  for(let i=1;i<=6;i++){
+    const a=document.createElement('a'); a.className='post'; a.href=IG_URL; a.target='_blank'; a.rel='noopener';
+    const ov=document.createElement('span'); ov.className='post-ov';
+    ov.innerHTML=`<span>@bouquetfleurs_tiznit</span><svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 21s-7.5-4.6-10-9.3C.6 8.6 2.6 5 6.1 5c2 0 3.4 1 4.4 2.5h3C14.5 6 15.9 5 17.9 5c3.5 0 5.5 3.6 4.1 6.7C19.5 16.4 12 21 12 21z" transform="scale(.92) translate(1 1)"/></svg>`;
+    const img=new Image(); img.loading='lazy'; img.alt='Bouquet photo '+i; img.referrerPolicy='no-referrer';
+    const fin=good=>{ done++; if(good) ok++;
+      if(done===6 && ok===0){ grid.style.display='none'; empty.hidden=false; } };
+    img.onload=()=>fin(true); img.onerror=()=>fin(false);
+    img.src='photo'+i+'.jpg';
+    a.append(img, ov); grid.appendChild(a);
+  }
+})();
+
+/* =====================================================
+   COMPOSER STATE
+   ===================================================== */
+const counts={}; Object.keys(FLOWERS).forEach(k=>counts[k]=0);
+const sum   = () => Object.values(counts).reduce((a,b)=>a+b,0);
+const total = () => Object.keys(counts).reduce((s,k)=>s+counts[k]*FLOWERS[k].price, 0);
+let stageV=null;
+
+function syncPalette(){
+  $$('#palette .p-row').forEach(row=>{
+    const t=row.dataset.t, n=counts[t];
+    row.classList.toggle('has', n>0);
+    row.querySelector('.p-n').textContent=n;
+  });
+}
+function updateStage(){ if(stageV) stageV.update(counts, RIBBON_COLOR); }
+function updateTotals(){
+  const n=sum();
+  $('#stemCount').textContent = n ? (LANG==='ar' ? `${n} ${n===1?'ساق':'ساقات'} — ${fmt(total())}` : `${n} stem${n>1?'s':''} — ${fmt(total())}`) : tr('The wrap is empty');
+  $('#stage').classList.toggle('empty', n===0);
+  syncTop();
+}
+const MIN_TOP_STEMS = 8;
+function syncTop(){
+  const inp=$('#bqTop'), tag=$('#stageNote'), n=sum(), ok=n>=MIN_TOP_STEMS, t=inp.value.trim();
+  inp.disabled=!ok;
+  $('#topHint').textContent = ok ? tr('— shown above your bouquet') : (LANG==='ar' ? `— يُفتح ابتداءً من ${MIN_TOP_STEMS} ساقات (${n}/${MIN_TOP_STEMS})` : `— unlocks from ${MIN_TOP_STEMS} stems (${n}/${MIN_TOP_STEMS})`);
+  const show = ok && !!t;
+  tag.textContent = t; tag.hidden = !show;
+  if(stageV){ stageV.root.position.y = show ? -.5 : 0; stageV.root.scale.setScalar(show ? .9 : 1); }
+}
+function refreshAll(){ syncPalette(); updateStage(); updateTotals(); }
+
+/* palette rows */
+function renderPalette(){
+  $('#palette').innerHTML = Object.keys(FLOWERS).map(k=>{
+    const F=FLOWERS[k], nm=fname(k), ar=LANG==='ar';
+    return `<div class="p-row" data-t="${k}">
+      <span class="p-name"><b>${nm}</b><span>${F.sub}</span>${F.tag?`<span class="sug-tag">✦ ${ftag(F.tag)}</span>`:''}</span>
+      <span class="p-price">${F.price} <span>${tr('MAD / stem')}</span></span>
+      <span class="p-step">
+        <button class="step" data-d="-1" aria-label="${ar?'إزالة':'Remove one'} ${nm}">−</button>
+        <b class="p-n">0</b>
+        <button class="step" data-d="1" aria-label="${ar?'إضافة':'Add one'} ${nm}">+</button>
+      </span>
+    </div>`;
+  }).join('');
+  syncPalette();
+}
+$('#palette').addEventListener('click', e=>{
+  const b=e.target.closest('.step'); if(!b) return;
+  const t=b.closest('.p-row').dataset.t;
+  counts[t]=Math.max(0, counts[t]+ +b.dataset.d);
+  refreshAll();
+});
+renderPalette();
+updateTotals();
+ $('#bqTop').addEventListener('input', syncTop);
+
+/* signature presets */
+ $$('.btn[data-preset]').forEach(btn=>btn.addEventListener('click', ()=>{
+  Object.keys(counts).forEach(k=>counts[k]=0);
+  btn.dataset.preset.split(',').forEach(p=>{ const [k,n]=p.split(':'); if(k in counts) counts[k]=+n; });
+  refreshAll();
+  $('#composer').scrollIntoView({behavior: reduced?'auto':'smooth'});
+  toast(LANG==='ar' ? `تم تحميل «${btn.dataset.name}» — عدّل عليها كما تشاء 🌸` : `"${btn.dataset.name}" loaded — tweak it as you like 🌸`);
+}));
+
+/* custom bouquet: free text, price agreed with the florist */
+ $('#customSend').addEventListener('click', ()=>{
+  const t=$('#customText').value.trim();
+  if(!t){ toast(tr('Write what you have in mind first 🌷')); $('#customText').focus(); return; }
+  const msg = LANG==='ar' ? '🌸 *Bouquet Fleurs — باقة حسب الطلب*\n\n'+t+'\n\nالسعر: يُتفق عليه مع بائع الورد' : '🌸 *Bouquet Fleurs — custom bouquet*\n\n'+t+'\n\nPrice: to be agreed with the florist';
+  window.open(`https://wa.me/${WA_NUM}?text=${encodeURIComponent(msg)}`, '_blank', 'noopener');
+});
+
+/* florist's choice / clear */
+ $('#diceBtn').addEventListener('click', ()=>{
+  Object.keys(counts).forEach(k=>counts[k]=0);
+  Object.keys(FLOWERS).sort(()=>Math.random()-.5).slice(0, 3+(Math.random()*2|0))
+    .forEach(k=>counts[k]=2+(Math.random()*3|0));
+  refreshAll();
+  toast(LANG==='ar' ? `اختيار بائع الورد — ${sum()} ساقات، ${fmt(total())} 🌼` : `Florist's choice — ${sum()} stems, ${fmt(total())} 🌼`);
+});
+ $('#clearBtn').addEventListener('click', ()=>{
+  Object.keys(counts).forEach(k=>counts[k]=0);
+  refreshAll(); toast(tr('Cleared — the wrap is empty'));
+});
+
+/* ---------- order modal ---------- */
+const modal=$('#orderModal');
+let lastOrder=null;
+
+function orderRef(){
+  const d=new Date(), p=n=>String(n).padStart(2,'0');
+  return `${p(d.getDate())}${p(d.getMonth()+1)}-${p(d.getHours())}${p(d.getMinutes())}`;
+}
+function buildOrderText(plain){
+  const L=lastOrder, ar=LANG==='ar';
+  const ref = orderRef();
+  const now = new Date();
+  const dateStr = ar
+    ? now.toLocaleDateString('ar-MA', {weekday:'long', day:'numeric', month:'long'}) + ' — ' + now.toLocaleTimeString('ar-MA', {hour:'2-digit', minute:'2-digit'})
+    : now.toLocaleDateString('en-GB', {weekday:'long', day:'numeric', month:'long'}) + ' — ' + now.toLocaleTimeString('en-GB', {hour:'2-digit', minute:'2-digit'});
+  const div = '┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄┄';
+  const itemLines = L.lines.map(l=>`▸ ${l.qty} × ${l.name}   —   ${fmt(l.amt)}`).join('\n');
+
+  if(ar){
+    const head = plain? '' : `🌸 *Bouquet Fleurs* — طلب جديد\n#${ref}\n${div}\n`;
+    let body = `${head}`
+      + `🗓️ ${dateStr}\n\n`
+      + `*الباقة:*\n${itemLines}\n`
+      + `${div}\n`
+      + `📦 التغليف: ورق كرافت أحمر + شريط أسود — مشمول\n`
+      + `🚚 التوصيل داخل تيزنيت — مجاني\n`
+      + `${div}\n`
+      + `*المجموع: ${fmt(L.total)}*\n`;
+    const extras=[];
+    if(L.name) extras.push(`🏷️ اسم الباقة: _${L.name}_`);
+    if(L.top)  extras.push(`✏️ نص فوق الباقة: _${L.top}_`);
+    if(L.note) extras.push(`💌 رسالة البطاقة: _${L.note}_`);
+    if(extras.length) body += `${div}\n` + extras.join('\n') + '\n';
+    if(!plain) body += `${div}\n📍 يرجى تأكيد العنوان والوقت المناسب للتسليم 🙏`;
+    return body;
+  }
+  const head = plain? '' : `🌸 *Bouquet Fleurs* — new order\n#${ref}\n${div}\n`;
+  let body = `${head}`
+    + `🗓️ ${dateStr}\n\n`
+    + `*Bouquet:*\n${itemLines}\n`
+    + `${div}\n`
+    + `📦 Wrapping: red kraft + black ribbon — included\n`
+    + `🚚 Delivery within Tiznit — free\n`
+    + `${div}\n`
+    + `*Total: ${fmt(L.total)}*\n`;
+  const extras=[];
+  if(L.name) extras.push(`🏷️ Bouquet name: _${L.name}_`);
+  if(L.top)  extras.push(`✏️ Text above bouquet: _${L.top}_`);
+  if(L.note) extras.push(`💌 Card note: _${L.note}_`);
+  if(extras.length) body += `${div}\n` + extras.join('\n') + '\n';
+  if(!plain) body += `${div}\n📍 Please confirm your address and preferred delivery time 🙏`;
+  return body;
+}
+function openOrder(){
+  if(sum()===0){ toast(tr('Your wrap is empty — pick some stems first 🌷')); return; }
+  const ar=LANG==='ar';
+  const lines=Object.keys(counts).filter(k=>counts[k]>0)
+    .map(k=>({name:fname(k), qty:counts[k], amt:counts[k]*FLOWERS[k].price}));
+  lastOrder={lines, total:total(), top:(sum()>=MIN_TOP_STEMS? $('#bqTop').value.trim():''), name:$('#bqName').value.trim(), note:$('#bqNote').value.trim()};
+  /* NOTE: all interpolated values below that can contain user-entered text
+     (l.name is from a fixed flower catalogue and is safe; lastOrder.top,
+     lastOrder.name and lastOrder.note come from free-text inputs and are
+     HTML-escaped with escHtml() before being inserted). */
+  $('#mLines').innerHTML =
+    lines.map(l=>`<div class="m-line"><span>${l.qty} × ${l.name}</span><i></i><b>${fmt(l.amt)}</b></div>`).join('')
+    + `<div class="m-line"><span>${tr(WRAP_LINE.label)}</span><i></i><b>${tr(WRAP_LINE.value)}</b></div>`
+    + `<div class="m-line"><span>${tr(DELIV_LINE.label)}</span><i></i><b>${tr(DELIV_LINE.value)}</b></div>`
+    + `<div class="m-line total"><span>${tr('Total')}</span><i></i><b>${fmt(lastOrder.total)}</b></div>`;
+  $('#mMeta').innerHTML =
+    (ar ? `الورق: <b>${tr(WRAP_LABEL)}</b> — التغليف والتوصيل مشمولان` : `Paper: <b>${WRAP_LABEL}</b> — wrapping &amp; delivery included`)
+    + (lastOrder.top? `<br>${ar?'نص فوق الباقة':'Text above bouquet'}: "${escHtml(lastOrder.top)}"`:'')
+    + (lastOrder.name? `<br>${ar?'اسم الباقة':'Bouquet name'}: "${escHtml(lastOrder.name)}"`:'')
+    + (lastOrder.note? `<br>${ar?'رسالة البطاقة':'Card note'}: "${escHtml(lastOrder.note)}"`:'');
+  $('#waSend').href=`https://wa.me/${WA_NUM}?text=${encodeURIComponent(buildOrderText(false))}`;
+  modal.hidden=false; document.body.style.overflow='hidden';
+  requestAnimationFrame(()=>modal.classList.add('show'));
+}
+function closeOrder(){
+  modal.classList.remove('show');
+  setTimeout(()=>{ modal.hidden=true; document.body.style.overflow=''; }, 280);
+}
+ $('#orderBtn').addEventListener('click', openOrder);
+modal.addEventListener('click', e=>{ if(e.target.closest('[data-close]')) closeOrder(); });
+addEventListener('keydown', e=>{ if(e.key==='Escape' && !modal.hidden) closeOrder(); });
+ $('#copyOrder').addEventListener('click', ()=>{
+  if(!lastOrder) return;
+  const t=buildOrderText(true);
+  const fb=()=>{ const ta=document.createElement('textarea'); ta.value=t; document.body.appendChild(ta);
+    ta.select(); try{ document.execCommand('copy'); toast(tr('Order copied — paste it in a DM 📋')); }
+    catch(err){ toast(tr('Copy failed — select it manually')); } ta.remove(); };
+  if(navigator.clipboard && navigator.clipboard.writeText)
+    navigator.clipboard.writeText(t).then(()=>toast(tr('Order copied — paste it in a DM 📋'))).catch(fb);
+  else fb();
+});
+
+/* =====================================================
+   3D ENGINE — procedural bouquets (Three.js r128)
+   ===================================================== */
+(function init3D(){
+  if(!window.THREE) return;               // offline → page stays usable without 3D
+  try{
+    document.body.classList.remove('no3d');
+
+    const SPH = new THREE.SphereGeometry(1, 12, 12);
+    const PAPER_GEO = new THREE.CylinderGeometry(1.02, .1, 1.18, 26, 1, true);
+    const PAPER_MAT = new THREE.MeshStandardMaterial({color:WRAP_COLOR, roughness:.85, metalness:0, side:THREE.DoubleSide});
+    const RIBBON_GEO = new THREE.TorusGeometry(.585, .05, 10, 32);
+    const SHADOW_GEO = new THREE.CircleGeometry(.95, 24);
+    const matCache = new Map();
+    const std = c => { if(!matCache.has(c)) matCache.set(c, new THREE.MeshStandardMaterial({color:c, roughness:.8, metalness:0})); return matCache.get(c); };
+    const ball = (mat, r, sy=1) => { const m=new THREE.Mesh(SPH, mat); m.scale.set(r, r*sy, r); return m; };
+    const petal = (mat, len, wid) => { const m=new THREE.Mesh(SPH, mat); m.scale.set(wid*.5, len*.5, wid*.18); return m; };
+
+    function headGroup(type){
+      const F=FLOWERS[type], g=new THREE.Group(), mA=std(F.a), mB=std(F.b);
+      const ring=(n, mat, rad, tilt, len, wid)=>{
+        for(let i=0;i<n;i++){
+          const p=new THREE.Group(); p.rotation.order='YXZ';
+          const m=petal(mat, len, wid); m.position.y=rad; p.add(m);
+          p.rotation.y = i/n*Math.PI*2 + (Math.random()-.5)*.25;
+          p.rotation.z = tilt + (Math.random()-.5)*.15;
+          g.add(p);
+        }};
+      switch(type){
+        case 'rose':
+          g.add(ball(mB,.085,1.15));
+          ring(5,mA,.05,.32,.20,.17); ring(7,mA,.075,.72,.24,.20); ring(8,mA,.085,1.08,.26,.22);
+          break;
+        case 'peony':{
+          const mL=std(0xF2C1C4);
+          g.add(ball(mB,.09,1.1));
+          ring(6,mA,.05,.25,.20,.17); ring(8,mL,.08,.68,.26,.21); ring(9,mA,.10,1.02,.30,.24); ring(11,mL,.10,1.32,.30,.22);
+          break;}
+        case 'gerbera':
+          g.add(ball(mB,.075,1));
+          ring(12,mA,.04,1.35,.30,.08); ring(16,mA,.055,1.5,.24,.06);
+          break;
+        case 'tulip':
+          ring(6,mA,.02,.16,.30,.20); ring(3,mB,.015,.05,.24,.14);
+          g.add(ball(mB,.05,1.4));
+          break;
+        case 'anemone':
+          ring(7,mA,.03,1.15,.27,.21); ring(5,mA,.045,.88,.20,.15);
+          g.add(ball(mB,.10,1.05));
+          break;
+        case 'gyp':
+          for(let i=0;i<9;i++){ const m=ball(mA,.045+Math.random()*.02);
+            m.position.set((Math.random()-.5)*.26,(Math.random()-.5)*.22,(Math.random()-.5)*.26); g.add(m); }
+          g.add(ball(mB,.05));
+          break;
+        case 'tuberose':
+          for(let i=0;i<7;i++){ const m=ball(mA,.05); m.scale.y*=2.1; const a=i/7*Math.PI*2;
+            m.position.set(Math.cos(a)*.06,(i%3)*.05-.02,Math.sin(a)*.06); g.add(m); }
+          g.add(ball(mB,.045,1.6));
+          break;
+        case 'euca':
+          g.add(ball(mB,.05));
+          break;
+      }
+      g.scale.setScalar(F.s);
+      return g;
+    }
+
+    function buildBouquet(recipe, ribbonColor){
+      const g=new THREE.Group(), tubes=[];
+      const paper=new THREE.Mesh(PAPER_GEO, PAPER_MAT); paper.position.y=.36; g.add(paper);
+      const rib=new THREE.Mesh(RIBBON_GEO, std(ribbonColor)); rib.rotation.x=Math.PI/2; rib.position.y=.3; g.add(rib);
+      const k1=ball(std(ribbonColor),.085,1.7), k2=ball(std(ribbonColor),.085,1.7);
+      k1.position.set(0,.3,.62); k1.rotation.z=.7; k2.position.set(0,.3,.62); k2.rotation.z=-.7;
+      g.add(k1,k2);
+      const sh=new THREE.Mesh(SHADOW_GEO, new THREE.MeshBasicMaterial({color:0x2A3320, transparent:true, opacity:.06}));
+      sh.rotation.x=-Math.PI/2; sh.position.y=-.21; g.add(sh);
+
+      const heads=[], Y=new THREE.Vector3(0,1,0);
+      const entries=Object.keys(recipe).filter(k=>recipe[k]>0);
+      const totalN=entries.reduce((s,k)=>s+recipe[k],0);
+      let idx=0;
+      entries.forEach(type=>{
+        const F=FLOWERS[type];
+        for(let i=0;i<recipe[type];i++){
+          const a=idx*2.39996, r=.10+.55*Math.pow(idx/Math.max(1,totalN), .7);
+          const cx=Math.cos(a), cz=Math.sin(a);
+          const h=F.h*(0.92+Math.random()*.16);
+          const curve=new THREE.CatmullRomCurve3([
+            new THREE.Vector3(0,-.2,0),
+            new THREE.Vector3(cx*r*.15, h*.3,  cz*r*.15),
+            new THREE.Vector3(cx*r*.55, h*.72, cz*r*.55),
+            new THREE.Vector3(cx*r,     h,     cz*r)
+          ]);
+          const tube=new THREE.Mesh(new THREE.TubeGeometry(curve,12, (type==='gyp'||type==='euca')?.016:.022, 6), std(0x5E7245));
+          tubes.push(tube.geometry); g.add(tube);
+          if(type==='euca'){
+            for(let j=0;j<6;j++){
+              const leaf=ball(std(j%2?0x7C9261:0x8FA36F), .085); leaf.scale.y*=.18; leaf.scale.z*=.75;
+              leaf.position.copy(curve.getPoint(.35+.6*j/6));
+              leaf.rotation.set(Math.random()*3, Math.random()*3, Math.random()*3);
+              g.add(leaf);
+            }
+          }
+          const head=headGroup(type);
+          head.scale.multiplyScalar(.92+Math.random()*.18);
+          head.position.copy(curve.getPoint(1));
+          head.quaternion.setFromUnitVectors(Y, curve.getTangent(1).normalize());
+          head.traverse(m=>m.userData.type=type);
+          g.add(head); heads.push(head);
+          idx++;
+        }
+      });
+      g.position.y=-.78;
+      return {group:g, heads, tubes};
+    }
+
+    const viewers=[];
+    function makeViewer(canvas, o){
+      const renderer=new THREE.WebGLRenderer({canvas, antialias:true, alpha:true});
+      renderer.setPixelRatio(Math.min(devicePixelRatio,2));
+      renderer.outputEncoding=THREE.sRGBEncoding;
+      renderer.setClearColor(0x000000, 0);
+      const scene=new THREE.Scene();
+      const camera=new THREE.PerspectiveCamera(34, 1, .1, 50);
+      camera.position.set(0,.25,7.4); camera.lookAt(0,.05,0);
+      scene.add(new THREE.AmbientLight(0xfff6e6,.85));
+      const key=new THREE.DirectionalLight(0xffffff,.75); key.position.set(2.5,4,3); scene.add(key);
+      const warm=new THREE.DirectionalLight(0xffd9a0,.35); warm.position.set(-3,2,-2); scene.add(warm);
+      const root=new THREE.Group(); scene.add(root);
+
+      const v={canvas, renderer, scene, camera, root, auto:!reduced && o.auto!==false,
+               speed:.004, dragging:false, last:0, zoom:!!o.zoom,
+               ray:new THREE.Raycaster(), ptr:new THREE.Vector2(), heads:[], tubes:[], cur:null};
+
+      v.update=(recipe, ribbonColor)=>{
+        if(v.cur){ root.remove(v.cur.group); v.cur.tubes.forEach(t=>t.dispose()); }
+        v.cur=buildBouquet(recipe, ribbonColor);
+        root.add(v.cur.group); v.heads=v.cur.heads; v.tubes=v.cur.tubes;
+      };
+      v.zoomBy=d=>{ if(v.zoom) camera.position.z=Math.min(9.5, Math.max(5.4, camera.position.z+d)); };
+
+      const size=()=>{ const w=canvas.clientWidth||1, h=canvas.clientHeight||1;
+        renderer.setSize(w,h,false); camera.aspect=w/h; camera.updateProjectionMatrix(); };
+      new ResizeObserver(size).observe(canvas.parentElement); size();
+
+      /* drag / hover chip / tap-to-remove */
+      let px=0, py=0, moved=0;
+      const chip=o.chip||null;
+      const cast=e=>{ const r=canvas.getBoundingClientRect();
+        v.ptr.set(((e.clientX-r.left)/r.width)*2-1, -((e.clientY-r.top)/r.height)*2+1);
+        v.ray.setFromCamera(v.ptr, camera);
+        const hits=v.ray.intersectObjects(v.heads, true);
+        return hits.length? hits[0].object.userData.type : null; };
+      if(o.drag){
+        canvas.addEventListener('pointerdown', e=>{ v.dragging=true; moved=0; px=e.clientX; py=e.clientY;
+          canvas.setPointerCapture(e.pointerId); v.last=performance.now();
+          if(chip) chip.classList.remove('show'); });
+        canvas.addEventListener('pointermove', e=>{
+          if(v.dragging){
+            const dx=e.clientX-px, dy=e.clientY-py; px=e.clientX; py=e.clientY;
+            moved+=Math.abs(dx)+Math.abs(dy);
+            root.rotation.y+=dx*.006;
+            root.rotation.x=Math.max(-.25, Math.min(.4, root.rotation.x+dy*.004));
+            v.last=performance.now();
+          } else if(chip && matchMedia('(hover:hover)').matches){
+            const type=cast(e);
+            if(type){ const F=FLOWERS[type], r=canvas.getBoundingClientRect();
+              chip.innerHTML=`${fname(type)} <span>· ${fmt(F.price)}</span>`;
+              chip.style.left=(e.clientX-r.left)+'px'; chip.style.top=(e.clientY-r.top)+'px';
+              chip.classList.add('show'); canvas.style.cursor='pointer';
+            } else { chip.classList.remove('show'); canvas.style.cursor='grab'; }
+          }});
+        const up=e=>{
+          if(!v.dragging) return; v.dragging=false; v.last=performance.now();
+          if(o.clickRemove && moved<7){
+            const type=cast(e);
+            if(type && o.onRemove) o.onRemove(type);
+          }};
+        canvas.addEventListener('pointerup', up);
+        canvas.addEventListener('pointercancel', ()=>v.dragging=false);
+      }
+      viewers.push(v);
+      return v;
+    }
+
+    /* one RAF loop for every viewer, skipping off-screen canvases */
+    (function loop(t){
+      requestAnimationFrame(loop);
+      for(const v of viewers){
+        const r=v.canvas.getBoundingClientRect();
+        const vis=r.bottom>-60 && r.top<innerHeight+60 && r.width>0;
+        if(v.auto && !v.dragging && t-v.last>2200) v.root.rotation.y+=v.speed;
+        if(vis) v.renderer.render(v.scene, v.camera);
+      }
+    })(0);
+
+    /* hero bouquet */
+    makeViewer($('#heroCanvas'), {drag:true})
+      .update({rose:4, peony:2, anemone:3, gyp:3, euca:2}, RIBBON_COLOR);
+
+    /* signature minis */
+    $$('.mini').forEach(cv=>{
+      const recipe={};
+      cv.dataset.recipe.split(',').forEach(p=>{ const [k,n]=p.split(':'); recipe[k]=+n; });
+      const rib=cv.dataset.ribbon? parseInt(cv.dataset.ribbon.replace('#',''),16) : RIBBON_COLOR;
+      const mv=makeViewer(cv, {drag:true, auto:!reduced});
+      mv.update(recipe, rib);
+    });
+
+    /* composer stage: hover chip + tap-to-remove + zoom + spin toggle */
+    const stageEl=$('#stage');
+    const chip=document.createElement('div'); chip.className='chip3d'; stageEl.appendChild(chip);
+    stageV=makeViewer($('#stageCanvas'), {drag:true, zoom:true, chip, clickRemove:true,
+      onRemove:type=>{ counts[type]=Math.max(0, counts[type]-1); refreshAll();
+        toast(LANG==='ar' ? `تمت إزالة: ${fname(type)}` : `Removed one ${FLOWERS[type].name}`); }});
+    updateStage(); syncTop();
+    $('#zin').addEventListener('click', ()=>stageV.zoomBy(-.9));
+    $('#zout').addEventListener('click', ()=>stageV.zoomBy(.9));
+    const spinT=$('#spinT');
+    spinT.addEventListener('click', ()=>{ stageV.auto=!stageV.auto; spinT.classList.toggle('off', !stageV.auto); });
+
+    /* show the drag hint once, when each canvas first appears */
+    const hintIO=new IntersectionObserver((es,io)=>es.forEach(en=>{
+      if(en.isIntersecting){ const h=en.target; h.classList.add('show');
+        setTimeout(()=>h.classList.remove('show'), 3800); io.unobserve(h); }
+    }), {threshold:.6});
+    [$('#heroHint'), $('#stageHint')].forEach(h=>{ if(h) hintIO.observe(h); });
+  }catch(err){ console.warn('3D unavailable:', err); }
+})();
+
+/* =====================================================
+   LANGUAGE SWITCH — EN ⇄ AR (RTL)
+   ===================================================== */
+const origText=new WeakMap(), origAttr=new WeakMap();
+function translateDOM(){
+  const ar=LANG==='ar';
+  const walker=document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, n=>{
+    const p=n.parentElement;
+    if(!p || p.closest('script,style,textarea,[data-dyn]')) return NodeFilter.FILTER_REJECT;
+    return (origText.has(n)? origText.get(n) : n.nodeValue).trim() ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
+  });
+  const nodes=[]; while(walker.nextNode()) nodes.push(walker.currentNode);
+  nodes.forEach(n=>{
+    if(!origText.has(n)) origText.set(n, n.nodeValue);
+    const o=origText.get(n), key=o.replace(/\s+/g,' ').trim();
+    const lead=o.match(/^\s*/)[0], trail=o.match(/\s*$/)[0];
+    n.nodeValue = (ar && AR[key]) ? lead+AR[key]+trail : o;
+  });
+  document.querySelectorAll('[placeholder],[aria-label],[title],[alt]').forEach(el=>{
+    if(el.closest('[data-dyn]') && el.id!=='langBtn') return;
+    if(!origAttr.has(el)) origAttr.set(el,{});
+    const st=origAttr.get(el);
+    ['placeholder','aria-label','title','alt'].forEach(a=>{
+      if(!el.hasAttribute(a) || el.id==='langBtn') return;
+      if(!(a in st)) st[a]=el.getAttribute(a);
+      const key=st[a].replace(/\s+/g,' ').trim();
+      el.setAttribute(a, (ar && AR[key]) ? AR[key] : st[a]);
+    });
+  });
+}
+function applyLang(){
+  const ar=LANG==='ar';
+  document.documentElement.lang = ar ? 'ar' : 'en';
+  document.documentElement.dir  = ar ? 'rtl' : 'ltr';
+  document.title = ar ? 'Bouquet Fleurs — تيزنيت · محل ورد إلكتروني ثلاثي الأبعاد' : 'Bouquet Fleurs — Tiznit · Fleuriste en ligne 3D';
+  $('#langBtn').textContent = ar ? 'English' : 'العربية';
+  translateDOM();
+  renderTicker(); renderPalette(); updateTotals();
+}
+$('#langBtn').addEventListener('click', ()=>{
+  LANG = LANG==='ar' ? 'en' : 'ar';
+  try{ localStorage.setItem('bf_lang', LANG); }catch(e){}
+  applyLang();
+});
+applyLang();
+</script>
+</body>
+</html>
